@@ -1,85 +1,77 @@
-# Plan: building reconstruction from an address
+# Plan: Budapest building reconstruction from an address
 
 ## Goal
-Input: an address and a postal code. Output:
-1. A sourced dossier on the building: identity, architect, dates, alterations.
-2. The original plans, if an archive has digitised them. Otherwise, the
-   exact archive request to order them.
-3. Reconstructed blueprints: one plan per floor and one elevation per façade,
-   as SVG with scale, dimensions and evidence grades.
+Input: a Budapest address and postal code. Output:
+1. A sourced dossier: identity, former addresses and street names, parcel
+   number, architect, dates, alterations, protection level.
+2. The original plans, if an archive has digitised them (BFL Tervtár,
+   MÉM MDK). Otherwise, the exact scan order to send.
+3. Reconstructed blueprints for each requested year: floor plans, roof plan
+   and elevations as SVG, with scale, dimensions and evidence grades.
 4. An interactive HTML 3D model. You can show, hide or isolate each wall,
-   opening, roof and statue, cut a section, and colour by evidence grade.
-5. A separate dossier for each statue, with the best possible visual
-   reconstruction and an honest label.
+   opening, roof part, stair and statue, cut a horizontal section, move a
+   year slider, and colour by evidence grade.
+5. A dossier and reference sheet for each statue, plus the best possible
+   3D figure with an honest grade.
 
 The workflow is the Claude Code skill in
-`.claude/skills/building-reconstruction/`. Start it with an address and
-Claude runs the phases below.
+`.claude/skills/building-reconstruction/`. Give Claude a Budapest address and
+it runs the phases below.
 
 ## Where the request needs correcting
-- **"The original blueprint"**: you get one only if an archive holds and has
-  digitised it. In Budapest, BFL has permit plans for many buildings, but
-  only part is online through Hungaricana. For the rest, the skill writes
-  the scan order. Everything else is a reconstruction, and each sheet says so.
-- **Arcanum ADT** needs a subscription. Without one, Claude sees only what
-  the public search page shows. If you have access, export the relevant pages
-  and give them to Claude.
-- **Google Maps / Earth / Street View** cannot be scraped or downloaded
-  (terms of service, no API access here). The skill uses OpenStreetMap,
-  Wikimedia Commons, Fortepan and Mapillary (with your token) instead. With a
-  browser tool, Claude can look at Street View and record what it saw.
-- **"As close to reality as possible"**: without an original plan or a
-  survey, expect ±2–5 % in plan dimensions and ±5–20 % in heights. Each
-  element shows its grade (A documented, B measured, C inferred,
-  D speculative), so you can see where the model is solid and where it is not.
-- **Statues**: a 3D figure built from one or two old photos is an
-  illustration. The hidden sides are invented. The skill labels it grade D
-  and never presents it as the original.
+- **"The original blueprint"**: only if BFL or MÉM MDK holds it and has put it
+  online. Hungaricana carries part of BFL's plans. For the rest, the skill
+  writes the scan order. Everything else is a reconstruction, and each sheet
+  says so.
+- **Arcanum ADT** needs a subscription for full text. Without one, Claude
+  uses only what the public search page shows. Export pages if you have
+  access.
+- **Google Maps / Earth / Street View** cannot be downloaded or scraped.
+  Claude can look at Street View with a browser tool and record what it saw.
+  OSM, Commons, Fortepan, Egykor and Mapillary (with your token) cover the
+  rest.
+- **Accuracy**: without an original plan or a survey, expect ±2–5 % in plan
+  dimensions and ±5–20 % in heights. A rectified photo checked against a
+  second known length shows the real error for that façade.
+- **Statues**: a figure built from one photo is an illustration (grade D).
+  The front outline is right; the depth and back are invented.
 
 ## Phases (detail in `SKILL.md`)
 | # | Phase | Output | Tooling |
 |---|---|---|---|
-| 0 | Intake: period, your files and subscriptions, scope | `00_intake/request.md` | `new_project.py` |
-| 1 | Locate and identify | geocode, OSM footprint and tags, Commons photo list | `fetch_open_data.py` |
-| 2 | Archive and literature sweep | `source_log.csv`, `timeline.md` | WebSearch/WebFetch + `references/sources.md` |
-| 3 | Image analysis and measurement | `catalog.csv`, `dimensions.md`, `conflicts.md` | `references/measurement.md` (homography rectification) |
-| 4 | Building model | `04_model/building.json` | `references/building-schema.md`, `make_blueprints.py --check` |
-| 5 | Blueprints | `05_blueprints/*.svg` | `make_blueprints.py` |
-| 6 | Interactive 3D | `06_3d/viewer.html` | `build_viewer.py` (Three.js) |
-| 7 | Sculpture | `07_sculpture/<id>/` | `references/sculpture-reconstruction.md` |
+| 0 | Intake: years, access, scope | `00_intake/request.md` | `new_project.py` (checks the postal code, derives the district) |
+| 1 | Locate, identify, seed | geocode, OSM footprint and tags, Commons, Wikidata, `search_plan.md`, first model | `fetch_open_data.py`, `seed_model.py` |
+| 2 | Archive and literature sweep | `source_log.csv`, `identity.md`, `timeline.md` | `search_plan.md`, `references/sources.md` |
+| 3 | Images and measurement | `catalog.csv`, rectified façades, `dimensions.md` | `pick_points.html`, `rectify_photo.py` |
+| 4 | Model | `building.json` with periods | `references/building-schema.md`, `--check` |
+| 5 | Blueprints and comparison | `05_blueprints/*.svg`, `comparison_*.html` | `make_blueprints.py`, `compare_original.py` |
+| 6 | Interactive 3D | `06_3d/viewer.html` | `build_viewer.py` |
+| 7 | Sculpture | dossier, `reference_sheet.html`, `mesh.glb` | `sculpture_sheet.py`, `statue_relief_glb.py` |
 | 8 | Report | `REPORT.md` | — |
 
-## Status
-Done and tested in this branch:
-- Skill instructions, source catalogue (Hungary in detail, other countries
-  as starting points), evidence grades, schema, measurement and sculpture
-  guides.
-- `new_project.py`: creates the project folder and templates.
-- `fetch_open_data.py`: Nominatim geocoding, OSM footprint and tags (with
-  Overpass mirror fallback), Commons geosearch. Tested on Andrássy út 22,
-  1061 Budapest: the footprint and tags came back (architect Ybl Miklós,
-  1875–1884). Commons was rate-limited from the test container; the script
-  reports this and goes on.
-- `make_blueprints.py`: validates the model and draws A3 plans and
-  elevations (scale bar, north arrow, dimensions, grade colours, title block).
-- `build_viewer.py` + `assets/viewer_template.html`: a single-file 3D
-  viewer with an element tree, isolate, hide, section slider, grade colours,
-  click-to-inspect with sources, and GLB loading for statue meshes.
-- `assets/example_building.json`: a fictional test model.
+## Status: built and tested
+| Part | Test |
+|---|---|
+| `new_project.py`: Budapest-only, postal code → district, hrsz., identity template | 1061 → VI. kerület; 2000 refused |
+| `fetch_open_data.py`: geocode, OSM (mirror fallback, Nominatim tags fallback), Commons with back-off, Wikidata within 100 m, `search_plan.md` | Andrássy út 22: footprint, Ybl Miklós, 100 Commons files; Wikidata was under an emergency rate limit at test time, which the script reported and skipped |
+| `seed_model.py`: walls from the footprint | Opera: 37 → 28 vertices, 5,145 m² |
+| `geometry.py`: shared geometry and validation | used by all generators |
+| Roofs: flat, gable, hip, mansard, pyramid, dome; several parts | L-shaped example |
+| Interior walls, rooms with areas, straight and dogleg stairs | plans and 3D |
+| `period` on every element; `--year`; viewer year slider | 1900 vs 2000 states |
+| `rectify_photo.py` + `pick_points.html` | synthetic photo: 1.30 m and 2.60 m recovered, 0.0 % check residual |
+| `compare_original.py` | rotated scan aligned: scale 1.251 (true 1.25), rotation −3.9° (true −4°) |
+| `sculpture_sheet.py`, `statue_relief_glb.py`, GLB in viewer | textured relief loads and faces the street |
 
-Next steps, in order of value:
-1. Run the skill on your first real address and adjust it to what goes wrong.
-2. `rectify_photo.py`: four-point homography that produces a scaled façade
-   image and a measurement table (OpenCV).
-3. Support non-rectangular roofs (L- and U-shaped wings, mansards, domes):
-   split the roof into rectangular parts in the schema.
-4. Generate a plan-vs-original comparison page when a scan is found.
-5. Statue pipeline: reference sheet, optional image-to-3D (grade D), GLB
-   into the viewer.
-6. Add interior partitions and stairs to the schema (only when sources exist).
+Not built (and why):
+- **Sections (vertical cuts) as SVG sheets**: the viewer's section slider
+  covers horizontal cuts; vertical section sheets can come next if needed.
+- **Automatic Fortepan / Hungaricana / Arcanum search**: none of them has a
+  documented public API that this workflow can rely on, and Hungaricana
+  blocks automated clients. They stay manual, driven by `search_plan.md`.
+- **Automatic photogrammetry of statues**: historic photo sets almost never
+  have enough overlapping views.
 
-## Open questions for you
-1. Which period should the default be: as built, or today?
-2. Do you have an Arcanum ADT subscription or a Mapillary token?
-3. Mostly Hungarian buildings, or other countries too? This decides how far
-   to expand `references/sources.md`.
+## Open question
+- Do you have an Arcanum ADT subscription or a Mapillary token? Without them
+  those two sources stay limited (search snippets only; no Mapillary).

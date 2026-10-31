@@ -3,13 +3,18 @@
 
 Usage: build_viewer.py projects/<slug>
 
-Ornament "model" paths are relative to the project folder; they are rewritten
-relative to 06_3d/ so the viewer finds them (serve the project folder over
-http for GLB files: `python3 -m http.server` from the project root).
+Roof faces and stair steps are computed here (geometry.py) so the viewer and
+the blueprints always show the same geometry. Ornament "model" paths are
+relative to the project folder; they are rewritten relative to 06_3d/.
+GLB files only load over http: run `python3 -m http.server` in the project
+folder and open http://localhost:8000/06_3d/viewer.html.
 """
 import argparse
 import json
+import sys
 from pathlib import Path
+
+from geometry import check, load_model, roof_faces, stair_steps
 
 TEMPLATE = Path(__file__).resolve().parent.parent / "assets/viewer_template.html"
 
@@ -19,8 +24,16 @@ def main():
     ap.add_argument("project")
     args = ap.parse_args()
     project = Path(args.project)
-    model = json.loads((project / "04_model/building.json").read_text(encoding="utf-8"))
-    for o in model.get("ornaments") or []:
+    model = load_model(project)
+    errs = check(model)
+    if errs:
+        print("\n".join("ERROR: " + e for e in errs))
+        sys.exit(1)
+    for r in model["roofs"]:
+        r["_faces"] = [[[round(c, 4) for c in p] for p in f] for f in roof_faces(r)]
+    for s in model["stairs"]:
+        s["_steps"], s["_lines"] = stair_steps(model, s)
+    for o in model["ornaments"]:
         if o.get("model") and not o["model"].startswith(("http://", "https://", "../")):
             o["model"] = "../" + o["model"]
     data = json.dumps(model, ensure_ascii=False).replace("</", "<\\/")

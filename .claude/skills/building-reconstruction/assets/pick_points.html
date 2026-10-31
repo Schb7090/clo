@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Photo Point Picker</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#1d1d1f; --muted:#6b6b70; --line:#dcd8d0; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#16171a; --panel:#1f2125; --ink:#ececef; --muted:#9a9aa3; --line:#33363c; } }
+  :root[data-theme="dark"] { --bg:#16171a; --panel:#1f2125; --ink:#ececef; --muted:#9a9aa3; --line:#33363c; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 system-ui, sans-serif; }
+  header { padding:12px 16px; background:var(--panel); border-bottom:1px solid var(--line); display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  #wrap { position:relative; display:inline-block; margin:16px; }
+  #wrap img { max-width:calc(100vw - 32px); display:block; cursor:crosshair; }
+  .pt { position:absolute; width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%; background:#e53935; border:2px solid #fff; color:#fff; font:700 10px/10px sans-serif; text-align:center; pointer-events:none; }
+  .pt span { position:absolute; left:14px; top:-2px; background:#e53935; padding:1px 4px; border-radius:3px; white-space:nowrap; }
+  textarea { width:100%; height:70px; font:12px ui-monospace, monospace; background:var(--panel); color:var(--ink); border:1px solid var(--line); }
+  #out { padding:0 16px 16px; }
+  button { font:inherit; padding:4px 10px; }
+  .muted { color:var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <input type="file" id="file" accept="image/*">
+  <button id="undo">Undo</button><button id="clear">Clear</button>
+  <span class="muted">Click 4 corners in order: top-left, top-right, bottom-right, bottom-left. Extra clicks become measurement pairs.</span>
+</header>
+<div id="out">
+  <p class="muted">Coordinates are in original image pixels. Copy the line below into <code>rectify_photo.py</code>.</p>
+  <textarea id="cmd" readonly></textarea>
+</div>
+<div id="wrap"><img id="img" alt=""></div>
+<script>
+const img = document.getElementById('img'), wrap = document.getElementById('wrap'), cmd = document.getElementById('cmd');
+let pts = [], name = 'photo.jpg';
+const LABELS = ['TL', 'TR', 'BR', 'BL'];
+document.getElementById('file').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  name = f.name; pts = []; img.src = URL.createObjectURL(f); img.onload = draw;
+};
+img.onclick = e => {
+  const r = img.getBoundingClientRect(), s = img.naturalWidth / r.width;
+  pts.push([Math.round((e.clientX - r.left) * s), Math.round((e.clientY - r.top) * s)]); draw();
+};
+document.getElementById('undo').onclick = () => { pts.pop(); draw(); };
+document.getElementById('clear').onclick = () => { pts = []; draw(); };
+addEventListener('resize', draw);
+function draw() {
+  wrap.querySelectorAll('.pt').forEach(n => n.remove());
+  const r = img.getBoundingClientRect(), s = r.width / (img.naturalWidth || 1);
+  pts.forEach((p, i) => {
+    const d = document.createElement('div'); d.className = 'pt';
+    d.style.left = p[0] * s + 'px'; d.style.top = p[1] * s + 'px';
+    const lab = document.createElement('span');
+    lab.textContent = i < 4 ? LABELS[i] : 'M' + (Math.floor((i - 4) / 2) + 1) + (i % 2 ? 'b' : 'a');
+    d.append(lab); wrap.append(d);
+  });
+  let c = `python3 rectify_photo.py "${name}" rectified.png --points "${pts.slice(0, 4).map(p => p.join(',')).join(' ')}" --width W --height H`;
+  for (let i = 4; i + 1 < pts.length; i += 2) c += ` --measure "M${(i - 4) / 2 + 1}:${pts[i].join(',')}:${pts[i + 1].join(',')}"`;
+  cmd.value = c;
+}
+</script>
+</body>
+</html>

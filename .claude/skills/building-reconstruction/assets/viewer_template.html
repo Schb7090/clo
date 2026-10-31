@@ -66,8 +66,11 @@
       <label style="flex:1">Section height <input id="cut" type="range" min="0" max="100" value="100" style="width:100%"></label>
       <span id="cutVal" style="width:52px;text-align:right">off</span>
     </div>
+    <div class="row" id="yearRow" style="display:none">
+      <label style="flex:1">Year <input id="year" type="range" style="width:100%"></label>
+      <span id="yearVal" style="width:52px;text-align:right"></span>
+    </div>
     <div class="row" id="legend"></div>
-    <div class="row"><label>Load other building.json <input id="file" type="file" accept=".json"></label></div>
   </div>
   <div id="tree"></div>
 </aside>
@@ -82,7 +85,8 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const GRADE = { A:'#2e7d32', B:'#1565c0', C:'#ef6c00', D:'#c62828' };
-const MAT = { wall:'#e8dcc6', opening:'#9fc3d9', door:'#7a5a3a', floor:'#b9b2a6', roof:'#9c4a3a', ornament:'#d8d2c4', statue:'#cfc8b8' };
+const MAT = { wall:'#e8dcc6', partition:'#f3efe6', opening:'#9fc3d9', door:'#7a5a3a', shop:'#5f8fa8', floor:'#b9b2a6',
+              roof:'#9c4a3a', dome:'#6f8f7f', stair:'#a89f90', ornament:'#d8d2c4', statue:'#cfc8b8' };
 
 const main = document.getElementById('main');
 const renderer = new THREE.WebGLRenderer({ antialias:true });
@@ -100,7 +104,21 @@ const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e6);
 
 let root = new THREE.Group(); scene.add(root);
 const elements = new Map();   // id -> { obj, data, kind, base }
-let selected = null, colorMode = 'material', model = null, maxZ = 10;
+let selected = null, colorMode = 'material', full = null, model = null, maxZ = 10, year = null;
+const hidden = new Set();     // ids the user hid; survives year changes
+
+function exists(el, y) {
+  if (y === null || !el.period) return true;
+  const [a, b] = el.period;
+  return (a === null || a === undefined || a <= y) && (b === null || b === undefined || y <= b);
+}
+function atYear(m, y) {
+  const c = { ...m };
+  for (const k of ['walls', 'openings', 'ornaments', 'rooms', 'stairs', 'roofs']) c[k] = (m[k] || []).filter(e => exists(e, y));
+  const ws = new Set(c.walls.map(w => w.id));
+  c.openings = c.openings.filter(o => ws.has(o.wall));
+  return c;
+}
 
 function setBg() {
   const css = getComputedStyle(document.documentElement);
@@ -153,14 +171,15 @@ function buildWall(w) {
   }
   const geo = new THREE.ExtrudeGeometry(shape, { depth:w.thickness, bevelEnabled:false, curveSegments:16 });
   geo.translate(0, 0, -w.thickness / 2);
-  const mesh = new THREE.Mesh(geo, mat(MAT.wall));
+  const base = w.interior ? MAT.partition : MAT.wall;
+  const mesh = new THREE.Mesh(geo, mat(base));
   group.add(mesh);
-  register(w.id, mesh, w, 'Walls', MAT.wall);
+  register(w.id, mesh, w, w.interior ? 'Interior walls' : 'Walls', base);
   for (const o of ops) {
     const depth = o.type === 'niche' ? w.thickness * 0.4 : w.thickness * 0.15;
-    const color = o.type === 'window' ? MAT.opening : o.type === 'niche' ? '#bdb5a5' : MAT.door;
+    const color = o.type === 'window' ? MAT.opening : o.type === 'shopfront' ? MAT.shop : o.type === 'niche' ? '#bdb5a5' : MAT.door;
     const pane = new THREE.Mesh(new THREE.BoxGeometry(o.width * 0.98, o.height * 0.98, depth),
-      mat(color, o.type === 'window' ? { transparent:true, opacity:0.55 } : {}));
+      mat(color, ['window', 'shopfront'].includes(o.type) ? { transparent:true, opacity:0.55 } : {}));
     pane.position.set(o.offset + o.width / 2, o.sill + o.height / 2, o.type === 'niche' ? -w.thickness / 2 - depth / 2 : 0);
     group.add(pane);
     register(o.id, pane, o, 'Openings', color);
@@ -169,7 +188,7 @@ function buildWall(w) {
 }
 
 function buildFloor(f) {
-  const pts = model.walls.filter(w => w.floor === f.id).map(w => w.from);
+  const pts = f.outline || model.walls.filter(w => w.floor === f.id && !w.interior).map(w => w.from);
   if (pts.length < 3) return;
   const shape = new THREE.Shape(pts.map(p => new THREE.Vector2(p[0], p[1])));
   const slab = f.slab ?? 0.3;
@@ -178,39 +197,38 @@ function buildFloor(f) {
   mesh.rotation.x = -Math.PI / 2;
   mesh.position.y = f.z - slab;
   root.add(mesh);
-  register('slab-' + f.id, mesh, { id:'slab-' + f.id, name:f.name + ' slab', z:f.z, thickness:slab }, 'Floors', MAT.floor);
+  register('slab-' + f.id, mesh, { id:'slab-' + f.id, name:f.name + ' slab', z:f.z, thickness:slab, slab:true }, 'Floors', MAT.floor);
 }
 
+function prism(poly, z0, z1, color) {
+  const shape = new THREE.Shape(poly.map(p => new THREE.Vector2(p[0], p[1])));
+  const mesh = new THREE.Mesh(new THREE.ExtrudeGeometry(shape, { depth:Math.max(z1 - z0, 0.01), bevelEnabled:false }), mat(color));
+  mesh.rotation.x = -Math.PI / 2; mesh.position.y = z0;
+  return mesh;
+}
+
+// roof faces are precomputed by build_viewer.py (geometry.py), identical to the blueprints
 function buildRoof(r) {
-  if (!r) return;
-  const fp = r.footprint || model.walls.filter(w => w.floor === model.floors.at(-1).id).map(w => w.from);
-  let geo;
-  if (r.type === 'flat' || fp.length !== 4) {
-    const shape = new THREE.Shape(fp.map(p => new THREE.Vector2(p[0], p[1])));
-    geo = new THREE.ExtrudeGeometry(shape, { depth:0.3, bevelEnabled:false });
-    const mesh = new THREE.Mesh(geo, mat(MAT.roof));
-    mesh.rotation.x = -Math.PI / 2; mesh.position.y = r.eaves;
-    root.add(mesh); register('roof', mesh, { id:'roof', name:'Roof', ...r }, 'Roof', MAT.roof);
-    return;
+  const pos = [];
+  for (const f of r._faces || []) {
+    for (let i = 1; i < f.length - 1; i++) for (const p of [f[0], f[i], f[i + 1]]) { const v = V(p[0], p[1], p[2]); pos.push(v.x, v.y, v.z); }
   }
-  const P = fp.map(p => new THREE.Vector2(p[0], p[1]));
-  let e1 = P[1].clone().sub(P[0]), e2 = P[3].clone().sub(P[0]);
-  let [p0, p1, p2, p3] = P;
-  if (e2.length() > e1.length()) { [p0, p1, p2, p3] = [P[1], P[2], P[3], P[0]]; e1 = p1.clone().sub(p0); e2 = p3.clone().sub(p0); }
-  const half = e2.clone().multiplyScalar(0.5);
-  let m0 = p0.clone().add(half), m1 = p1.clone().add(half);
-  if (r.type === 'hip') {
-    const d = e1.clone().normalize().multiplyScalar(Math.min(e2.length() / 2, e1.length() / 2 - 0.01));
-    m0.add(d); m1.sub(d);
-  }
-  const E = r.eaves, R = r.ridge;
-  const a = [V(p0.x, p0.y, E), V(p1.x, p1.y, E), V(p2.x, p2.y, E), V(p3.x, p3.y, E)];
-  const ra = V(m0.x, m0.y, R), rb = V(m1.x, m1.y, R);
-  const tris = [a[0], a[1], rb, a[0], rb, ra, a[2], a[3], ra, a[2], ra, rb, a[1], a[2], rb, a[3], a[0], ra];
-  geo = new THREE.BufferGeometry().setFromPoints(tris);
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   geo.computeVertexNormals();
-  const mesh = new THREE.Mesh(geo, mat(MAT.roof));
-  root.add(mesh); register('roof', mesh, { id:'roof', name:'Roof (' + r.type + ')', ...r }, 'Roof', MAT.roof);
+  const base = r.type === 'dome' ? MAT.dome : MAT.roof;
+  const mesh = new THREE.Mesh(geo, mat(base));
+  root.add(mesh);
+  const { _faces, ...data } = r;
+  register(r.id, mesh, { name:'Roof (' + r.type + ')', ...data }, 'Roofs', base);
+}
+
+function buildStair(s) {
+  const group = new THREE.Group();
+  for (const st of s._steps || []) group.add(prism(st.poly, st.z0, st.z1, MAT.stair));
+  root.add(group);
+  const { _steps, _lines, ...data } = s;
+  register(s.id, group, { name:'Stair (' + (s.type || 'straight') + ')', ...data }, 'Stairs', MAT.stair);
 }
 
 function buildOrnament(o) {
@@ -285,6 +303,7 @@ function buildTree() {
 
 function setVisible(id, v) {
   const e = elements.get(id); if (!e) return;
+  if (v) hidden.delete(id); else hidden.add(id);
   e.obj.visible = v;
   document.querySelectorAll(`input[data-id="${CSS.escape(id)}"]`).forEach(cb => cb.checked = v);
 }
@@ -314,28 +333,55 @@ function fit() {
   if (box.isEmpty()) return;
   const c = box.getCenter(new THREE.Vector3()), r = box.getSize(new THREE.Vector3()).length() / 2;
   controls.target.copy(c);
-  camera.position.copy(c).add(new THREE.Vector3(r * 1.2, r * 0.8, r * 1.6));
+  const fov = THREE.MathUtils.degToRad(camera.fov) / 2;
+  const dist = r / Math.sin(Math.min(fov, Math.atan(Math.tan(fov) * camera.aspect))) * 1.05;
+  camera.position.copy(c).add(new THREE.Vector3(0.55, 0.4, 0.73).normalize().multiplyScalar(dist));
   camera.near = r / 100; camera.far = r * 50; camera.updateProjectionMatrix();
 }
 
+// user choice + section: a slab above the cut would cover the storey being inspected
+function applyVisibility() {
+  for (const [id, e] of elements) e.obj.visible = !hidden.has(id) && !(e.data.slab && e.data.z > clip.constant + 1e-3);
+}
+
+function rebuild(refit) {
+  model = atYear(full, year);
+  scene.remove(root); root = new THREE.Group(); scene.add(root); elements.clear();
+  model.floors.forEach(buildFloor);
+  model.walls.forEach(buildWall);
+  model.roofs.forEach(buildRoof);
+  model.stairs.forEach(buildStair);
+  model.ornaments.forEach(buildOrnament);
+  applyVisibility();
+  maxZ = Math.max(1, ...model.floors.map(f => f.z + f.height),
+    ...model.roofs.flatMap(r => (r._faces || []).flat().map(p => p[2])));
+  buildTree(); applyColors();
+  if (selected && elements.has(selected)) select(selected); else { selected = null; document.getElementById('info').style.display = 'none'; }
+  if (refit) fit();
+}
+
 function load(data) {
-  model = data;
-  scene.remove(root); root = new THREE.Group(); scene.add(root); elements.clear(); selected = null;
-  (model.floors || []).forEach(buildFloor);
-  (model.walls || []).forEach(buildWall);
-  buildRoof(model.roof);
-  (model.ornaments || []).forEach(buildOrnament);
-  maxZ = Math.max(1, ...(model.floors || []).map(f => f.z + f.height), model.roof?.ridge || 0);
-  const m = model.meta || {};
+  full = data;
+  for (const k of ['floors', 'walls', 'openings', 'ornaments', 'rooms', 'stairs', 'roofs', 'sources']) full[k] ||= [];
+  const m = full.meta || {};
+  // periods present in the model drive the year slider
+  const years = ['walls', 'openings', 'ornaments', 'stairs', 'roofs'].flatMap(k => full[k])
+    .flatMap(e => e.period || []).filter(y => typeof y === 'number');
+  const row = document.getElementById('yearRow'), slider = document.getElementById('year');
+  if (years.length) {
+    const lo = Math.min(...years, m.year ?? Infinity) - 5, hi = Math.max(...years, new Date().getFullYear());
+    slider.min = lo; slider.max = hi; year = m.year ?? hi; slider.value = year;
+    document.getElementById('yearVal').textContent = year;
+    row.style.display = '';
+  } else { year = null; row.style.display = 'none'; }
   document.getElementById('title').textContent = m.name || 'Building';
-  document.getElementById('subtitle').textContent = [m.address, m.postal, m.state].filter(Boolean).join(' · ');
+  document.getElementById('subtitle').textContent = [m.address, m.postal, m.district, m.hrsz ? 'hrsz. ' + m.hrsz : ''].filter(Boolean).join(' · ');
   document.getElementById('banner').textContent = 'Reconstruction — ' + (m.disclaimer || 'not a measured survey.');
-  document.getElementById('info').style.display = 'none';
-  buildTree(); applyColors(); fit();
+  rebuild(true);
 }
 
 // controls
-document.getElementById('showAll').onclick = () => { for (const id of elements.keys()) setVisible(id, true); };
+document.getElementById('showAll').onclick = () => { hidden.clear(); for (const id of elements.keys()) setVisible(id, true); };
 document.getElementById('isolate').onclick = () => { if (!selected) return; for (const id of elements.keys()) setVisible(id, id === selected); fit(); };
 document.getElementById('hideSel').onclick = () => { if (selected) setVisible(selected, false); };
 document.getElementById('fit').onclick = fit;
@@ -343,12 +389,13 @@ document.getElementById('colorMode').onchange = ev => { colorMode = ev.target.va
 const cut = document.getElementById('cut');
 cut.oninput = () => {
   const v = +cut.value;
-  if (v >= 100) { clip.constant = 1e6; document.getElementById('cutVal').textContent = 'off'; return; }
+  if (v >= 100) { clip.constant = 1e6; document.getElementById('cutVal').textContent = 'off'; applyVisibility(); return; }
   const z = maxZ * v / 100; clip.constant = z;
   document.getElementById('cutVal').textContent = '+' + z.toFixed(2);
+  applyVisibility();
 };
-document.getElementById('file').onchange = async ev => {
-  const f = ev.target.files[0]; if (f) load(JSON.parse(await f.text()));
+document.getElementById('year').oninput = ev => {
+  year = +ev.target.value; document.getElementById('yearVal').textContent = year; rebuild(false);
 };
 const legend = document.getElementById('legend');
 for (const [g, c] of Object.entries(GRADE)) legend.insertAdjacentHTML('beforeend', `<span><b class="g" style="background:${c}">${g}</b> ${{A:'documented',B:'measured',C:'inferred',D:'speculative'}[g]}</span>`);
@@ -377,7 +424,7 @@ addEventListener('resize', resize); resize();
 renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
 
 const raw = document.getElementById('building-data').textContent.trim();
-try { load(JSON.parse(raw)); } catch (err) { document.getElementById('banner').textContent = 'No embedded building.json — use “Load other building.json”.'; }
+try { load(JSON.parse(raw)); } catch (err) { document.getElementById('banner').textContent = 'No building data embedded — run build_viewer.py.'; }
 window.__viewer = { elements, select, setVisible, fit };
 </script>
 </body>

@@ -1,60 +1,71 @@
-# Source catalogue
+# Budapest source catalogue
 
-Work top to bottom. Columns: what it holds, how to reach it, limits.
-"Verify" means the access path was not confirmed when this file was written:
-check it before relying on it, and fix this file if it changed.
+Work top to bottom. `fetch_open_data.py` writes `01_sources/search_plan.md`
+with ready queries for this list. "Verify" marks an access path that was not
+confirmed when this file was written (blocked from the build environment or
+unclear coverage): check it, then fix this file.
 
-## 1. Open data (every country — automated by `fetch_open_data.py`)
+## Budapest facts that change how you search
+- **Budapest exists since 1873** (Pest + Buda + Óbuda). Older records sit
+  under the separate towns: Pest, Buda, Óbuda.
+- **Street names changed many times** (1870s, 1890s, 1919, 1940s, 1950s,
+  1990s). Find every former name of the street first and repeat each
+  street-based search with each name, in Hungarian and, before 1918, German.
+- **House numbers changed too.** Early 19th c. sources may use conscription
+  numbers instead of street numbers (verify per period). Track the parcel
+  number (helyrajzi szám, hrsz.): it is the stable key in BFL.
+- **Postal code → district**: 1XXY, XX = district (1061 → VI. kerület).
+- **Protection levels**: national monument (műemlék), capital local
+  protection (fővárosi helyi védelem), district local protection (kerületi
+  helyi védelem). Each level has its own documentation.
+- **1944–45 siege** damaged many façades, roofs and statues; post-war repairs
+  often simplified ornament. Date every photo before trusting it.
 
-| Source | Holds | Access | Limits |
+## Primary: plans and permits
+| Source | Holds | Access | Notes |
 |---|---|---|---|
-| OpenStreetMap / Nominatim | geocode, address | `nominatim.openstreetmap.org/search` | 1 req/s, needs User-Agent |
-| OpenStreetMap / Overpass | footprint polygon, `building:levels`, `height`, `roof:shape`, `start_date`, `architect`, `heritage`, `wikidata` | `overpass-api.de` and mirrors | tags are volunteer data: grade B for footprint, C for tags |
-| Wikimedia Commons | geotagged photos, old postcards, plans | MediaWiki API `list=geosearch` | needs User-Agent; check each file's licence |
-| Wikidata | identity, architect, dates, heritage IDs | `query.wikidata.org` SPARQL | sparse for ordinary buildings |
-| Mapillary | street-level photos | API needs a free token | ask the user for a token |
+| Budapest Főváros Levéltára (BFL), Tervtár | building permit plans, searchable by hrsz. and address; series XV.17.d.329 (verify) | Hungaricana `archives.hungaricana.hu` (partial); research room; scan order | grade A when found; order scans for the rest |
+| BFL, Pest Szépészeti Bizottság (1808–1873) | plans of Pest buildings before unification | BFL (verify digitisation) | German and Hungarian |
+| BFL, Buda / Óbuda town records | pre-1873 building matters | BFL | |
+| MÉM MDK (Magyar Építészeti Múzeum és Műemlékvédelmi Dokumentációs Központ) | Tervtár (plans), Fotótár (photos), survey drawings of protected buildings | research request | often measured surveys: grade A/B |
+| District building authority | post-war permits, alterations | owner or legitimate interest | ÉTDR (`e-epites.hu`) covers only recent electronic permits |
+| Land registry (ingatlan-nyilvántartás) | current hrsz., owner | paid (e-hiteles tulajdoni lap / TAKARNET) | use only to get the hrsz. |
 
-## 2. Hungary
-
-| Source | Holds | Access | Limits |
+## Text: newspapers, journals, books
+| Source | Holds | Access | Notes |
 |---|---|---|---|
-| Hungaricana (`hungaricana.hu`) | free portal of Hungarian public collections: library (journals, address books), archives, maps, images. Budapest Főváros Levéltára (BFL) building plans (Tervtár) where digitised | web search; `library.`, `archives.`, `maps.` subdomains | blocks some automated clients; coverage of plans is partial |
-| BFL — Budapest Főváros Levéltára | building permit plans of Budapest, searchable by parcel (hrsz.) and address | Hungaricana or in person / scan order | not all fonds digitised; order scans for the rest |
-| MNL — Magyar Nemzeti Levéltár, county archives | permit plans outside Budapest, estate maps, manorial records | in person, scan order; some on Hungaricana | slow; write a precise request |
-| Local building authority (építéshatóság) | later permits, alterations | request by owner or with legitimate interest | ÉTDR covers only recent electronic permits |
-| MÉM MDK (Magyar Építészeti Múzeum és Műemlékvédelmi Dokumentációs Központ) | monument documentation: Tervtár (plans), Fotótár (photos), survey drawings | research request | protected buildings mainly |
-| Fortepan (`fortepan.hu`) | ~200k+ historic photos, 1900s–1990s, mostly Hungary, searchable by place | web search | CC BY-SA 3.0; credit "Fortepan / <donor>" |
-| Arcanum ADT (`adt.arcanum.com`) | full-text Hungarian journals and newspapers 18th c.–today, incl. *Építő Ipar*, *Magyar Építőművészet*, *Vasárnapi Ujság* | search page public; full text needs subscription | ask the user to export pages; do not claim unread content |
-| Arcanum Maps / MAPIRE (`maps.arcanum.com`) | georeferenced Habsburg military surveys, cadastral maps, historic city maps | web viewer | viewing free in part, some layers paid |
-| Egykor.hu | old photos of Hungarian places, often by address | web | user-contributed, licences vary |
-| Műemlékem.hu | descriptions of Hungarian monuments, photos | web | secondary source, grade C |
-| FSZEK Budapest Gyűjtemény | Budapest photos, postcards, prints | via Hungaricana (verify) | |
-| Budapest address books (*Budapesti Czím- és Lakásjegyzék*) | owners, residents by year | Hungaricana library / ADT (verify which) | |
+| Arcanum ADT (`adt.arcanum.com`) | full text of Hungarian press 18th c.–today: *Építő Ipar*, *Magyar Építőművészet*, *Vasárnapi Ujság*, *Pesti Napló*, *Budapesti Hírlap*… | search public; full text needs subscription | ask the user to export pages; never claim unread text |
+| Hungaricana library (`library.hungaricana.hu`) | journals, Budapest address books (*Budapesti Czím- és Lakásjegyzék*), local history | free; blocks some automated clients | owners and residents per year |
+| FSZEK Budapest Gyűjtemény | Budapest local history library, postcards, prints | in person; parts on Hungaricana; image archive (verify URL) | |
+| Budapest100 (`budapest100.hu`) | house histories written for the yearly open-house festival | free | secondary, grade C; follow its sources |
+| PestBuda (`pestbuda.hu`) | articles on Budapest buildings and streets | free | secondary, grade C |
 
-Search terms to combine: street + number, old street name, `hrsz.`,
-`bérház`, `kastély`, `kúria`, `palota`, `villa`, architect name, owner name,
-`építési engedély`, `tervrajz`, `homlokzat`, `szobor`, `szoborcsoport`,
-German forms (`Zinshaus`, `Palais`, `Schloss`) for pre-1918 material.
+## Images
+| Source | Holds | Access | Notes |
+|---|---|---|---|
+| Fortepan (`fortepan.hu`) | historic photos, 1900s–1990s, strong Budapest coverage | free search | CC BY-SA 3.0; credit "Fortepan / <donor>" |
+| Egykor.hu | old photos by place, often by address | free | user-contributed; licence per image |
+| Wikimedia Commons | geotagged photos, postcards | API (`fetch_open_data.py`) | licence per file |
+| Köztérkép (`kozterkep.hu`) | public art incl. some façade sculpture, sculptor names | free | verify coverage of façade figures |
+| Mapillary | recent street-level photos | needs the user's token | |
+| Google Street View | recent street-level photos, several dates | manual look only (no download) | record the imagery date |
+| Aerial photos | roofs, courtyards, wings | Hadtörténeti Intézet és Múzeum Térképtár; Arcanum (verify which sets) | |
 
-## 3. Other countries (start points)
+## Maps
+| Source | Holds | Access | Notes |
+|---|---|---|---|
+| Arcanum Maps / MAPIRE (`maps.arcanum.com`) | georeferenced Habsburg surveys, Budapest city and cadastral maps | viewer; some layers paid | footprint, courtyard and wings per period |
+| Hungaricana maps (`maps.hungaricana.hu`) | BFL map collection incl. parcel maps | free (verify) | match hrsz. to plot |
+| OpenStreetMap | current footprint, tags | `fetch_open_data.py` | footprint grade B |
 
-| Country | Plans / surveys | Photos / journals |
+## Identity
+| Source | Holds | Notes |
 |---|---|---|
-| Austria | Wiener Stadt- und Landesarchiv (WStLA), Baupolizei files by district | ANNO (Österreichische Nationalbibliothek) newspapers, Bildarchiv Austria |
-| Germany | municipal Bauaktenarchiv / Bauordnungsamt; Landesamt für Denkmalpflege | Deutsche Digitale Bibliothek, Deutsche Fotothek |
-| UK | Historic England Archive; county record offices | Britain from Above, British Newspaper Archive (paid) |
-| France | Archives départementales, Archives de Paris (permis de construire) | Gallica (BnF), Mérimée/POP heritage database |
-| USA | HABS/HAER/HALS measured drawings (Library of Congress) — often real measured plans | Library of Congress Prints & Photographs, Chronicling America |
-| Czechia / Slovakia | municipal and regional archives, Národní památkový ústav | Kramerius digital libraries |
-| Europe-wide | — | Europeana |
+| Wikidata | architect (P84), inception (P571), heritage (P1435), image (P18), Commons category (P373) | `fetch_open_data.py`; sparse for ordinary houses |
+| Műemlékem.hu | monument descriptions, photos | secondary, grade C |
+| Monument register | protection status, ID | find the current official register; verify host |
 
-If a country is not listed: find (1) the national heritage register,
-(2) the archive that holds municipal building permits, (3) the national
-digital library, (4) the main open photo archive. Log how you found them.
-
-## 4. Things that are not reachable
-
+## Not reachable
 - Google Maps / Earth / Street View content: no scraping, no tile download.
-  Manual viewing via a browser tool only, recorded as an observation.
-- Paywalled full text and archive scans you were not given.
+- Paywalled full text and archive scans that the user did not supply.
 - Private interiors: only published photos or the user's own.

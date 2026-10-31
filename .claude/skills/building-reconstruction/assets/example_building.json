@@ -1,28 +1,37 @@
 {
  "meta": {
-  "name": "Example manor house (fictional test model)",
-  "address": "Example street 1",
-  "postal": "0000",
-  "country": "--",
+  "name": "Example tenement house (fictional test model)",
+  "address": "Példa utca 1.",
+  "postal": "1061",
+  "district": "VI. kerület",
+  "hrsz": "00000",
+  "country": "HU",
   "lat": null,
   "lon": null,
-  "state": "as built (fictional)",
+  "year": 1900,
+  "state": "as built",
   "architect": null,
-  "built": "c. 1820 (fictional)",
+  "built": "1889–1891 (fictional)",
   "disclaimer": "Fictional example to test the generators. Not a real building."
  },
  "sources": [
   {
    "id": "S1",
-   "title": "Fictional rectified façade photo",
+   "title": "Fictional rectified façade photo, 1905",
    "url": "",
    "grade": "B"
   },
   {
    "id": "S2",
-   "title": "Fictional postcard showing the statue",
+   "title": "Fictional postcard showing the attic statue, c.1910",
    "url": "",
    "grade": "C"
+  },
+  {
+   "id": "S3",
+   "title": "Fictional 1952 shopfront permit",
+   "url": "",
+   "grade": "A"
   }
  ],
  "floors": [
@@ -30,33 +39,118 @@
    "id": "F0",
    "name": "Ground floor",
    "z": 0.0,
-   "height": 4.4,
-   "slab": 0.35
+   "height": 4.6,
+   "slab": 0.4,
+   "outline": [
+    [
+     0,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
   },
   {
    "id": "F1",
    "name": "First floor (piano nobile)",
-   "z": 4.4,
-   "height": 4.0,
-   "slab": 0.35
+   "z": 4.6,
+   "height": 4.2,
+   "slab": 0.35,
+   "outline": [
+    [
+     0,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "F2",
+   "name": "Second floor",
+   "z": 8.8,
+   "height": 3.8,
+   "slab": 0.35,
+   "outline": [
+    [
+     0,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
   }
  ],
  "walls": [
   {
    "id": "W0S",
-   "name": "South (street) façade — Ground floor",
+   "name": "Street façade (south) — Ground floor",
    "floor": "F0",
    "facade": "S",
-   "facade_name": "South (street) façade",
+   "facade_name": "Street façade (south)",
    "from": [
     0,
     0
    ],
    "to": [
-    20,
+    24,
     0
    ],
-   "thickness": 0.8,
+   "thickness": 0.9,
    "material": "brick, lime render",
    "confidence": "B",
    "sources": [
@@ -66,79 +160,173 @@
   },
   {
    "id": "W0E",
-   "name": "East façade — Ground floor",
+   "name": "East party wall — Ground floor",
    "floor": "F0",
    "facade": "E",
-   "facade_name": "East façade",
+   "facade_name": "East party wall",
    "from": [
-    20,
+    24,
     0
    ],
    "to": [
-    20,
-    12
+    24,
+    26
    ],
-   "thickness": 0.8,
+   "thickness": 0.9,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
   },
   {
-   "id": "W0N",
-   "name": "North (garden) façade — Ground floor",
+   "id": "W0NW",
+   "name": "Wing north — Ground floor",
    "floor": "F0",
-   "facade": "N",
-   "facade_name": "North (garden) façade",
+   "facade": "NW",
+   "facade_name": "Wing north",
    "from": [
-    20,
-    12
+    24,
+    26
+   ],
+   "to": [
+    16,
+    26
+   ],
+   "thickness": 0.9,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W0WW",
+   "name": "Courtyard façade of wing — Ground floor",
+   "floor": "F0",
+   "facade": "WW",
+   "facade_name": "Courtyard façade of wing",
+   "from": [
+    16,
+    26
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.9,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W0NM",
+   "name": "Courtyard façade (north) — Ground floor",
+   "floor": "F0",
+   "facade": "NM",
+   "facade_name": "Courtyard façade (north)",
+   "from": [
+    16,
+    14
    ],
    "to": [
     0,
-    12
+    14
    ],
-   "thickness": 0.8,
+   "thickness": 0.9,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
   },
   {
    "id": "W0W",
-   "name": "West façade — Ground floor",
+   "name": "West party wall — Ground floor",
    "floor": "F0",
    "facade": "W",
-   "facade_name": "West façade",
+   "facade_name": "West party wall",
    "from": [
     0,
-    12
+    14
    ],
    "to": [
     0,
     0
    ],
-   "thickness": 0.8,
+   "thickness": 0.9,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "P01",
+   "name": "Partition P01",
+   "floor": "F0",
+   "interior": true,
+   "from": [
+    0,
+    9
+   ],
+   "to": [
+    16,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P02",
+   "name": "Partition P02",
+   "floor": "F0",
+   "interior": true,
+   "from": [
+    8,
+    0
+   ],
+   "to": [
+    8,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P03",
+   "name": "Partition P03",
+   "floor": "F0",
+   "interior": true,
+   "from": [
+    16,
+    0
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
   },
   {
    "id": "W1S",
-   "name": "South (street) façade — First floor (piano nobile)",
+   "name": "Street façade (south) — First floor (piano nobile)",
    "floor": "F1",
    "facade": "S",
-   "facade_name": "South (street) façade",
+   "facade_name": "Street façade (south)",
    "from": [
     0,
     0
    ],
    "to": [
-    20,
+    24,
     0
    ],
-   "thickness": 0.65,
+   "thickness": 0.75,
    "material": "brick, lime render",
    "confidence": "B",
    "sources": [
@@ -148,63 +336,333 @@
   },
   {
    "id": "W1E",
-   "name": "East façade — First floor (piano nobile)",
+   "name": "East party wall — First floor (piano nobile)",
    "floor": "F1",
    "facade": "E",
-   "facade_name": "East façade",
+   "facade_name": "East party wall",
    "from": [
-    20,
+    24,
     0
    ],
    "to": [
-    20,
-    12
+    24,
+    26
    ],
-   "thickness": 0.65,
+   "thickness": 0.75,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
   },
   {
-   "id": "W1N",
-   "name": "North (garden) façade — First floor (piano nobile)",
+   "id": "W1NW",
+   "name": "Wing north — First floor (piano nobile)",
    "floor": "F1",
-   "facade": "N",
-   "facade_name": "North (garden) façade",
+   "facade": "NW",
+   "facade_name": "Wing north",
    "from": [
-    20,
-    12
+    24,
+    26
+   ],
+   "to": [
+    16,
+    26
+   ],
+   "thickness": 0.75,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W1WW",
+   "name": "Courtyard façade of wing — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "WW",
+   "facade_name": "Courtyard façade of wing",
+   "from": [
+    16,
+    26
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.75,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W1NM",
+   "name": "Courtyard façade (north) — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "NM",
+   "facade_name": "Courtyard façade (north)",
+   "from": [
+    16,
+    14
    ],
    "to": [
     0,
-    12
+    14
    ],
-   "thickness": 0.65,
+   "thickness": 0.75,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
   },
   {
    "id": "W1W",
-   "name": "West façade — First floor (piano nobile)",
+   "name": "West party wall — First floor (piano nobile)",
    "floor": "F1",
    "facade": "W",
-   "facade_name": "West façade",
+   "facade_name": "West party wall",
    "from": [
     0,
-    12
+    14
    ],
    "to": [
     0,
     0
    ],
-   "thickness": 0.65,
+   "thickness": 0.75,
    "material": "brick, lime render",
    "confidence": "C",
    "sources": [],
-   "notes": "rear walls inferred from symmetry"
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "P11",
+   "name": "Partition P11",
+   "floor": "F1",
+   "interior": true,
+   "from": [
+    0,
+    9
+   ],
+   "to": [
+    16,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P12",
+   "name": "Partition P12",
+   "floor": "F1",
+   "interior": true,
+   "from": [
+    8,
+    0
+   ],
+   "to": [
+    8,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P13",
+   "name": "Partition P13",
+   "floor": "F1",
+   "interior": true,
+   "from": [
+    16,
+    0
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "W2S",
+   "name": "Street façade (south) — Second floor",
+   "floor": "F2",
+   "facade": "S",
+   "facade_name": "Street façade (south)",
+   "from": [
+    0,
+    0
+   ],
+   "to": [
+    24,
+    0
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "W2E",
+   "name": "East party wall — Second floor",
+   "floor": "F2",
+   "facade": "E",
+   "facade_name": "East party wall",
+   "from": [
+    24,
+    0
+   ],
+   "to": [
+    24,
+    26
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W2NW",
+   "name": "Wing north — Second floor",
+   "floor": "F2",
+   "facade": "NW",
+   "facade_name": "Wing north",
+   "from": [
+    24,
+    26
+   ],
+   "to": [
+    16,
+    26
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W2WW",
+   "name": "Courtyard façade of wing — Second floor",
+   "floor": "F2",
+   "facade": "WW",
+   "facade_name": "Courtyard façade of wing",
+   "from": [
+    16,
+    26
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W2NM",
+   "name": "Courtyard façade (north) — Second floor",
+   "floor": "F2",
+   "facade": "NM",
+   "facade_name": "Courtyard façade (north)",
+   "from": [
+    16,
+    14
+   ],
+   "to": [
+    0,
+    14
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "W2W",
+   "name": "West party wall — Second floor",
+   "floor": "F2",
+   "facade": "W",
+   "facade_name": "West party wall",
+   "from": [
+    0,
+    14
+   ],
+   "to": [
+    0,
+    0
+   ],
+   "thickness": 0.6,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "inferred from typology of Pest tenement houses (fictional)"
+  },
+  {
+   "id": "P21",
+   "name": "Partition P21",
+   "floor": "F2",
+   "interior": true,
+   "from": [
+    0,
+    9
+   ],
+   "to": [
+    16,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P22",
+   "name": "Partition P22",
+   "floor": "F2",
+   "interior": true,
+   "from": [
+    8,
+    0
+   ],
+   "to": [
+    8,
+    9
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
+  },
+  {
+   "id": "P23",
+   "name": "Partition P23",
+   "floor": "F2",
+   "interior": true,
+   "from": [
+    16,
+    0
+   ],
+   "to": [
+    16,
+    14
+   ],
+   "thickness": 0.3,
+   "confidence": "C",
+   "sources": [],
+   "notes": "layout inferred (fictional)"
   }
  ],
  "openings": [
@@ -212,49 +670,112 @@
    "id": "O0S1",
    "wall": "W0S",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.6,
    "confidence": "B",
    "sources": [
     "S1"
+   ],
+   "period": [
+    null,
+    1951
+   ]
+  },
+  {
+   "id": "O0S1s",
+   "wall": "W0S",
+   "type": "shopfront",
+   "offset": 0.6,
+   "width": 2.8,
+   "sill": 0.3,
+   "height": 3.4,
+   "confidence": "B",
+   "sources": [
+    "S3"
+   ],
+   "period": [
+    1952,
+    null
    ]
   },
   {
    "id": "O0S2",
    "wall": "W0S",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.6,
    "confidence": "B",
    "sources": [
     "S1"
+   ],
+   "period": [
+    null,
+    1951
+   ]
+  },
+  {
+   "id": "O0S2s",
+   "wall": "W0S",
+   "type": "shopfront",
+   "offset": 4.6,
+   "width": 2.8,
+   "sill": 0.3,
+   "height": 3.4,
+   "confidence": "B",
+   "sources": [
+    "S3"
+   ],
+   "period": [
+    1952,
+    null
    ]
   },
   {
    "id": "O0S3",
    "wall": "W0S",
-   "type": "arch",
-   "offset": 9.2,
-   "width": 1.6,
-   "sill": 0.0,
-   "height": 3.4,
+   "type": "window",
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.6,
    "confidence": "B",
    "sources": [
     "S1"
+   ],
+   "period": [
+    null,
+    1951
+   ]
+  },
+  {
+   "id": "O0S3s",
+   "wall": "W0S",
+   "type": "shopfront",
+   "offset": 8.6,
+   "width": 2.8,
+   "sill": 0.3,
+   "height": 3.4,
+   "confidence": "B",
+   "sources": [
+    "S3"
+   ],
+   "period": [
+    1952,
+    null
    ]
   },
   {
    "id": "O0S4",
    "wall": "W0S",
-   "type": "window",
-   "offset": 13.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
+   "type": "arch",
+   "offset": 12.5,
+   "width": 3.0,
+   "sill": 0.0,
+   "height": 4.2,
    "confidence": "B",
    "sources": [
     "S1"
@@ -264,132 +785,165 @@
    "id": "O0S5",
    "wall": "W0S",
    "type": "window",
-   "offset": 17.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
+   "offset": 17.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.6,
    "confidence": "B",
    "sources": [
     "S1"
+   ],
+   "period": [
+    null,
+    1951
    ]
   },
   {
-   "id": "O0E1",
-   "wall": "W0E",
-   "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
-   "confidence": "C",
-   "sources": []
-  },
-  {
-   "id": "O0E2",
-   "wall": "W0E",
-   "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
-   "confidence": "C",
-   "sources": []
-  },
-  {
-   "id": "O0E3",
-   "wall": "W0E",
-   "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
-   "confidence": "C",
-   "sources": []
-  },
-  {
-   "id": "O0N1",
-   "wall": "W0N",
-   "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
-   "confidence": "C",
-   "sources": []
-  },
-  {
-   "id": "O0N2",
-   "wall": "W0N",
-   "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 1.0,
-   "height": 2.4,
-   "confidence": "C",
-   "sources": []
-  },
-  {
-   "id": "O0N3",
-   "wall": "W0N",
-   "type": "door",
-   "offset": 9.2,
-   "width": 1.6,
-   "sill": 0.0,
+   "id": "O0S5s",
+   "wall": "W0S",
+   "type": "shopfront",
+   "offset": 16.6,
+   "width": 2.8,
+   "sill": 0.3,
    "height": 3.4,
-   "confidence": "C",
-   "sources": []
+   "confidence": "B",
+   "sources": [
+    "S3"
+   ],
+   "period": [
+    1952,
+    null
+   ]
   },
   {
-   "id": "O0N4",
-   "wall": "W0N",
+   "id": "O0S6",
+   "wall": "W0S",
    "type": "window",
-   "offset": 13.4,
-   "width": 1.2,
-   "sill": 1.0,
+   "offset": 21.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.6,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ],
+   "period": [
+    null,
+    1951
+   ]
+  },
+  {
+   "id": "O0S6s",
+   "wall": "W0S",
+   "type": "shopfront",
+   "offset": 20.6,
+   "width": 2.8,
+   "sill": 0.3,
+   "height": 3.4,
+   "confidence": "B",
+   "sources": [
+    "S3"
+   ],
+   "period": [
+    1952,
+    null
+   ]
+  },
+  {
+   "id": "O0NW1",
+   "wall": "W0NW",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.2,
    "height": 2.4,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O0N5",
-   "wall": "W0N",
+   "id": "O0NW2",
+   "wall": "W0NW",
    "type": "window",
-   "offset": 17.4,
-   "width": 1.2,
-   "sill": 1.0,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.2,
    "height": 2.4,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O0W1",
-   "wall": "W0W",
+   "id": "O0WW1",
+   "wall": "W0WW",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 1.0,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.2,
    "height": 2.4,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O0W2",
-   "wall": "W0W",
+   "id": "O0WW2",
+   "wall": "W0WW",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 1.0,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.2,
    "height": 2.4,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O0W3",
-   "wall": "W0W",
+   "id": "O0WW3",
+   "wall": "W0WW",
    "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 1.0,
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0NM1",
+   "wall": "W0NM",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0NM2",
+   "wall": "W0NM",
+   "type": "window",
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0NM3",
+   "wall": "W0NM",
+   "type": "window",
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.2,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0NM4",
+   "wall": "W0NM",
+   "type": "window",
+   "offset": 13.35,
+   "width": 1.3,
+   "sill": 1.2,
    "height": 2.4,
    "confidence": "C",
    "sources": []
@@ -398,10 +952,10 @@
    "id": "O1S1",
    "wall": "W1S",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "B",
    "sources": [
     "S1"
@@ -411,10 +965,10 @@
    "id": "O1S2",
    "wall": "W1S",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "B",
    "sources": [
     "S1"
@@ -424,10 +978,10 @@
    "id": "O1S3",
    "wall": "W1S",
    "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "B",
    "sources": [
     "S1"
@@ -437,10 +991,10 @@
    "id": "O1S4",
    "wall": "W1S",
    "type": "window",
-   "offset": 13.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 13.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "B",
    "sources": [
     "S1"
@@ -450,226 +1004,792 @@
    "id": "O1S5",
    "wall": "W1S",
    "type": "window",
-   "offset": 17.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 17.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "B",
    "sources": [
     "S1"
    ]
   },
   {
-   "id": "O1E1",
-   "wall": "W1E",
+   "id": "O1S6",
+   "wall": "W1S",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 21.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1NW1",
+   "wall": "W1NW",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1E2",
-   "wall": "W1E",
+   "id": "O1NW2",
+   "wall": "W1NW",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1E3",
-   "wall": "W1E",
+   "id": "O1WW1",
+   "wall": "W1WW",
    "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1N1",
-   "wall": "W1N",
+   "id": "O1WW2",
+   "wall": "W1WW",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1N2",
-   "wall": "W1N",
+   "id": "O1WW3",
+   "wall": "W1WW",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1N3",
-   "wall": "W1N",
+   "id": "O1NM1",
+   "wall": "W1NM",
    "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1N4",
-   "wall": "W1N",
+   "id": "O1NM2",
+   "wall": "W1NM",
    "type": "window",
-   "offset": 13.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1N5",
-   "wall": "W1N",
+   "id": "O1NM3",
+   "wall": "W1NM",
    "type": "window",
-   "offset": 17.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1W1",
-   "wall": "W1W",
+   "id": "O1NM4",
+   "wall": "W1NM",
    "type": "window",
-   "offset": 1.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 13.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.8,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1W2",
-   "wall": "W1W",
+   "id": "O2S1",
+   "wall": "W2S",
    "type": "window",
-   "offset": 5.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2S2",
+   "wall": "W2S",
+   "type": "window",
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2S3",
+   "wall": "W2S",
+   "type": "window",
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2S4",
+   "wall": "W2S",
+   "type": "window",
+   "offset": 13.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2S5",
+   "wall": "W2S",
+   "type": "window",
+   "offset": 17.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2S6",
+   "wall": "W2S",
+   "type": "window",
+   "offset": 21.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O2NW1",
+   "wall": "W2NW",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
    "confidence": "C",
    "sources": []
   },
   {
-   "id": "O1W3",
-   "wall": "W1W",
+   "id": "O2NW2",
+   "wall": "W2NW",
    "type": "window",
-   "offset": 9.4,
-   "width": 1.2,
-   "sill": 0.9,
-   "height": 2.5,
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2WW1",
+   "wall": "W2WW",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2WW2",
+   "wall": "W2WW",
+   "type": "window",
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2WW3",
+   "wall": "W2WW",
+   "type": "window",
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2NM1",
+   "wall": "W2NM",
+   "type": "window",
+   "offset": 1.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2NM2",
+   "wall": "W2NM",
+   "type": "window",
+   "offset": 5.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2NM3",
+   "wall": "W2NM",
+   "type": "window",
+   "offset": 9.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O2NM4",
+   "wall": "W2NM",
+   "type": "window",
+   "offset": 13.35,
+   "width": 1.3,
+   "sill": 1.0,
+   "height": 2.4,
    "confidence": "C",
    "sources": []
   }
  ],
- "roof": {
-  "type": "hip",
-  "eaves": 8.4,
-  "ridge": 12.6,
-  "footprint": [
-   [
-    -0.5,
-    -0.5
-   ],
-   [
-    20.5,
-    -0.5
-   ],
-   [
-    20.5,
-    12.5
-   ],
-   [
-    -0.5,
-    12.5
-   ]
-  ],
-  "confidence": "C",
-  "sources": [
-   "S2"
-  ]
- },
- "ornaments": [
+ "rooms": [
   {
-   "id": "R1",
-   "type": "statue",
-   "name": "Allegorical figure",
-   "wall": "W1S",
-   "position": [
-    10,
-    -0.25,
-    8.4
+   "id": "R01",
+   "floor": "F0",
+   "name": "Shop",
+   "polygon": [
+    [
+     0,
+     0
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     0,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R02",
+   "floor": "F0",
+   "name": "Gateway",
+   "polygon": [
+    [
+     8,
+     0
+    ],
+    [
+     16,
+     0
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     8,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R03",
+   "floor": "F0",
+   "name": "Corridor",
+   "polygon": [
+    [
+     0,
+     9
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "R04",
+   "floor": "F0",
+   "name": "Stair hall / wing",
+   "polygon": [
+    [
+     16,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "R11",
+   "floor": "F1",
+   "name": "Salon",
+   "polygon": [
+    [
+     0,
+     0
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     0,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R12",
+   "floor": "F1",
+   "name": "Dining room",
+   "polygon": [
+    [
+     8,
+     0
+    ],
+    [
+     16,
+     0
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     8,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R13",
+   "floor": "F1",
+   "name": "Corridor",
+   "polygon": [
+    [
+     0,
+     9
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "R14",
+   "floor": "F1",
+   "name": "Stair hall / wing",
+   "polygon": [
+    [
+     16,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "R21",
+   "floor": "F2",
+   "name": "Salon",
+   "polygon": [
+    [
+     0,
+     0
+    ],
+    [
+     8,
+     0
+    ],
+    [
+     8,
+     9
+    ],
+    [
+     0,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R22",
+   "floor": "F2",
+   "name": "Dining room",
+   "polygon": [
+    [
+     8,
+     0
+    ],
+    [
+     16,
+     0
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     8,
+     9
+    ]
+   ]
+  },
+  {
+   "id": "R23",
+   "floor": "F2",
+   "name": "Corridor",
+   "polygon": [
+    [
+     0,
+     9
+    ],
+    [
+     16,
+     9
+    ],
+    [
+     16,
+     14
+    ],
+    [
+     0,
+     14
+    ]
+   ]
+  },
+  {
+   "id": "R24",
+   "floor": "F2",
+   "name": "Stair hall / wing",
+   "polygon": [
+    [
+     16,
+     0
+    ],
+    [
+     24,
+     0
+    ],
+    [
+     24,
+     26
+    ],
+    [
+     16,
+     26
+    ],
+    [
+     16,
+     14
+    ]
+   ]
+  }
+ ],
+ "stairs": [
+  {
+   "id": "ST0",
+   "floor": "F0",
+   "type": "dogleg",
+   "start": [
+    21.6,
+    15.0
    ],
-   "size": [
-    0.7,
-    0.6,
-    1.9
+   "angle": 90,
+   "width": 1.4,
+   "going": 0.3,
+   "steps": 28,
+   "landing": 1.6,
+   "gap": 0.2,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "ST1",
+   "floor": "F1",
+   "type": "dogleg",
+   "start": [
+    21.6,
+    15.0
    ],
-   "sculptor": null,
-   "material": "limestone",
+   "angle": 90,
+   "width": 1.4,
+   "going": 0.3,
+   "steps": 26,
+   "landing": 1.6,
+   "gap": 0.2,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "ST2",
+   "floor": "F2",
+   "type": "dogleg",
+   "start": [
+    21.6,
+    15.0
+   ],
+   "angle": 90,
+   "width": 1.4,
+   "going": 0.3,
+   "steps": 24,
+   "landing": 1.6,
+   "gap": 0.2,
+   "confidence": "C",
+   "sources": []
+  }
+ ],
+ "roofs": [
+  {
+   "id": "RF1",
+   "type": "mansard",
+   "footprint": [
+    [
+     -0.4,
+     -0.4
+    ],
+    [
+     24.4,
+     -0.4
+    ],
+    [
+     24.4,
+     14.4
+    ],
+    [
+     -0.4,
+     14.4
+    ]
+   ],
+   "eaves": 12.6,
+   "break": 16.0,
+   "break_inset": 1.2,
+   "ridge": 17.4,
+   "confidence": "C",
+   "sources": [
+    "S2"
+   ]
+  },
+  {
+   "id": "RF2",
+   "type": "gable",
+   "footprint": [
+    [
+     15.6,
+     14.4
+    ],
+    [
+     24.4,
+     14.4
+    ],
+    [
+     24.4,
+     26.4
+    ],
+    [
+     15.6,
+     26.4
+    ]
+   ],
+   "eaves": 12.6,
+   "ridge": 16.0,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "RF3",
+   "type": "dome",
+   "center": [
+    12,
+    5
+   ],
+   "radius": 2.4,
+   "eaves": 17.0,
+   "ridge": 20.2,
    "confidence": "D",
    "sources": [
     "S2"
    ],
-   "notes": "pose unknown; placeholder"
-  },
+   "period": [
+    1891,
+    1944
+   ],
+   "notes": "corner dome lost in 1944 (fictional)"
+  }
+ ],
+ "ornaments": [
   {
-   "id": "R2",
-   "type": "cornice",
-   "name": "Main cornice",
-   "wall": "W1S",
+   "id": "OR1",
+   "type": "statue",
+   "name": "Allegory of Industry",
+   "wall": "W2S",
    "position": [
-    10,
-    -0.45,
-    8.1
+    12,
+    -0.2,
+    12.6
    ],
    "size": [
-    20.6,
-    0.5,
+    0.8,
+    0.6,
+    2.2
+   ],
+   "sculptor": null,
+   "material": "zinc cast",
+   "confidence": "D",
+   "sources": [
+    "S2"
+   ],
+   "period": [
+    1891,
+    1944
+   ],
+   "notes": "pose from one postcard; hidden sides unknown"
+  },
+  {
+   "id": "OR2",
+   "type": "cornice",
+   "name": "Main cornice",
+   "wall": "W2S",
+   "position": [
+    12,
+    -0.5,
+    12.2
+   ],
+   "size": [
+    24.8,
+    0.6,
+    0.4
+   ],
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "OR3",
+   "type": "relief",
+   "name": "Cartouche above gateway",
+   "wall": "W0S",
+   "position": [
+    12,
+    -0.5,
+    4.25
+   ],
+   "size": [
+    1.6,
+    0.15,
     0.3
    ],
    "confidence": "C",
    "sources": [
-    "S2"
-   ]
-  },
-  {
-   "id": "R3",
-   "type": "relief",
-   "name": "Coat of arms above entrance",
-   "wall": "W0S",
-   "position": [
-    10,
-    -0.45,
-    3.6
-   ],
-   "size": [
-    1.4,
-    0.15,
-    0.7
-   ],
-   "confidence": "C",
-   "sources": [
-    "S2"
+    "S1"
    ]
   }
  ]
