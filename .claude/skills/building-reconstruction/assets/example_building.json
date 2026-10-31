@@ -1,0 +1,676 @@
+{
+ "meta": {
+  "name": "Example manor house (fictional test model)",
+  "address": "Example street 1",
+  "postal": "0000",
+  "country": "--",
+  "lat": null,
+  "lon": null,
+  "state": "as built (fictional)",
+  "architect": null,
+  "built": "c. 1820 (fictional)",
+  "disclaimer": "Fictional example to test the generators. Not a real building."
+ },
+ "sources": [
+  {
+   "id": "S1",
+   "title": "Fictional rectified façade photo",
+   "url": "",
+   "grade": "B"
+  },
+  {
+   "id": "S2",
+   "title": "Fictional postcard showing the statue",
+   "url": "",
+   "grade": "C"
+  }
+ ],
+ "floors": [
+  {
+   "id": "F0",
+   "name": "Ground floor",
+   "z": 0.0,
+   "height": 4.4,
+   "slab": 0.35
+  },
+  {
+   "id": "F1",
+   "name": "First floor (piano nobile)",
+   "z": 4.4,
+   "height": 4.0,
+   "slab": 0.35
+  }
+ ],
+ "walls": [
+  {
+   "id": "W0S",
+   "name": "South (street) façade — Ground floor",
+   "floor": "F0",
+   "facade": "S",
+   "facade_name": "South (street) façade",
+   "from": [
+    0,
+    0
+   ],
+   "to": [
+    20,
+    0
+   ],
+   "thickness": 0.8,
+   "material": "brick, lime render",
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "W0E",
+   "name": "East façade — Ground floor",
+   "floor": "F0",
+   "facade": "E",
+   "facade_name": "East façade",
+   "from": [
+    20,
+    0
+   ],
+   "to": [
+    20,
+    12
+   ],
+   "thickness": 0.8,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  },
+  {
+   "id": "W0N",
+   "name": "North (garden) façade — Ground floor",
+   "floor": "F0",
+   "facade": "N",
+   "facade_name": "North (garden) façade",
+   "from": [
+    20,
+    12
+   ],
+   "to": [
+    0,
+    12
+   ],
+   "thickness": 0.8,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  },
+  {
+   "id": "W0W",
+   "name": "West façade — Ground floor",
+   "floor": "F0",
+   "facade": "W",
+   "facade_name": "West façade",
+   "from": [
+    0,
+    12
+   ],
+   "to": [
+    0,
+    0
+   ],
+   "thickness": 0.8,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  },
+  {
+   "id": "W1S",
+   "name": "South (street) façade — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "S",
+   "facade_name": "South (street) façade",
+   "from": [
+    0,
+    0
+   ],
+   "to": [
+    20,
+    0
+   ],
+   "thickness": 0.65,
+   "material": "brick, lime render",
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ],
+   "notes": ""
+  },
+  {
+   "id": "W1E",
+   "name": "East façade — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "E",
+   "facade_name": "East façade",
+   "from": [
+    20,
+    0
+   ],
+   "to": [
+    20,
+    12
+   ],
+   "thickness": 0.65,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  },
+  {
+   "id": "W1N",
+   "name": "North (garden) façade — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "N",
+   "facade_name": "North (garden) façade",
+   "from": [
+    20,
+    12
+   ],
+   "to": [
+    0,
+    12
+   ],
+   "thickness": 0.65,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  },
+  {
+   "id": "W1W",
+   "name": "West façade — First floor (piano nobile)",
+   "floor": "F1",
+   "facade": "W",
+   "facade_name": "West façade",
+   "from": [
+    0,
+    12
+   ],
+   "to": [
+    0,
+    0
+   ],
+   "thickness": 0.65,
+   "material": "brick, lime render",
+   "confidence": "C",
+   "sources": [],
+   "notes": "rear walls inferred from symmetry"
+  }
+ ],
+ "openings": [
+  {
+   "id": "O0S1",
+   "wall": "W0S",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O0S2",
+   "wall": "W0S",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O0S3",
+   "wall": "W0S",
+   "type": "arch",
+   "offset": 9.2,
+   "width": 1.6,
+   "sill": 0.0,
+   "height": 3.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O0S4",
+   "wall": "W0S",
+   "type": "window",
+   "offset": 13.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O0S5",
+   "wall": "W0S",
+   "type": "window",
+   "offset": 17.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O0E1",
+   "wall": "W0E",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0E2",
+   "wall": "W0E",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0E3",
+   "wall": "W0E",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0N1",
+   "wall": "W0N",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0N2",
+   "wall": "W0N",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0N3",
+   "wall": "W0N",
+   "type": "door",
+   "offset": 9.2,
+   "width": 1.6,
+   "sill": 0.0,
+   "height": 3.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0N4",
+   "wall": "W0N",
+   "type": "window",
+   "offset": 13.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0N5",
+   "wall": "W0N",
+   "type": "window",
+   "offset": 17.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0W1",
+   "wall": "W0W",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0W2",
+   "wall": "W0W",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O0W3",
+   "wall": "W0W",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 1.0,
+   "height": 2.4,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1S1",
+   "wall": "W1S",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1S2",
+   "wall": "W1S",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1S3",
+   "wall": "W1S",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1S4",
+   "wall": "W1S",
+   "type": "window",
+   "offset": 13.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1S5",
+   "wall": "W1S",
+   "type": "window",
+   "offset": 17.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "B",
+   "sources": [
+    "S1"
+   ]
+  },
+  {
+   "id": "O1E1",
+   "wall": "W1E",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1E2",
+   "wall": "W1E",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1E3",
+   "wall": "W1E",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1N1",
+   "wall": "W1N",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1N2",
+   "wall": "W1N",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1N3",
+   "wall": "W1N",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1N4",
+   "wall": "W1N",
+   "type": "window",
+   "offset": 13.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1N5",
+   "wall": "W1N",
+   "type": "window",
+   "offset": 17.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1W1",
+   "wall": "W1W",
+   "type": "window",
+   "offset": 1.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1W2",
+   "wall": "W1W",
+   "type": "window",
+   "offset": 5.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  },
+  {
+   "id": "O1W3",
+   "wall": "W1W",
+   "type": "window",
+   "offset": 9.4,
+   "width": 1.2,
+   "sill": 0.9,
+   "height": 2.5,
+   "confidence": "C",
+   "sources": []
+  }
+ ],
+ "roof": {
+  "type": "hip",
+  "eaves": 8.4,
+  "ridge": 12.6,
+  "footprint": [
+   [
+    -0.5,
+    -0.5
+   ],
+   [
+    20.5,
+    -0.5
+   ],
+   [
+    20.5,
+    12.5
+   ],
+   [
+    -0.5,
+    12.5
+   ]
+  ],
+  "confidence": "C",
+  "sources": [
+   "S2"
+  ]
+ },
+ "ornaments": [
+  {
+   "id": "R1",
+   "type": "statue",
+   "name": "Allegorical figure",
+   "wall": "W1S",
+   "position": [
+    10,
+    -0.25,
+    8.4
+   ],
+   "size": [
+    0.7,
+    0.6,
+    1.9
+   ],
+   "sculptor": null,
+   "material": "limestone",
+   "confidence": "D",
+   "sources": [
+    "S2"
+   ],
+   "notes": "pose unknown; placeholder"
+  },
+  {
+   "id": "R2",
+   "type": "cornice",
+   "name": "Main cornice",
+   "wall": "W1S",
+   "position": [
+    10,
+    -0.45,
+    8.1
+   ],
+   "size": [
+    20.6,
+    0.5,
+    0.3
+   ],
+   "confidence": "C",
+   "sources": [
+    "S2"
+   ]
+  },
+  {
+   "id": "R3",
+   "type": "relief",
+   "name": "Coat of arms above entrance",
+   "wall": "W0S",
+   "position": [
+    10,
+    -0.45,
+    3.6
+   ],
+   "size": [
+    1.4,
+    0.15,
+    0.7
+   ],
+   "confidence": "C",
+   "sources": [
+    "S2"
+   ]
+  }
+ ]
+}

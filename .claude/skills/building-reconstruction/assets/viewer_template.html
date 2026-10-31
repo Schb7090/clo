@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Building Reconstruction Viewer</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#ffffff; --ink:#1d1d1f; --muted:#6b6b70; --line:#dcd8d0; --accent:#1565c0; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg:#16171a; --panel:#1f2125; --ink:#ececef; --muted:#9a9aa3; --line:#33363c; --accent:#64b5f6; }
+  }
+  :root[data-theme="dark"] { --bg:#16171a; --panel:#1f2125; --ink:#ececef; --muted:#9a9aa3; --line:#33363c; --accent:#64b5f6; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:13px/1.4 system-ui, sans-serif; height:100vh; display:flex; overflow:hidden; }
+  #side { width:300px; min-width:300px; background:var(--panel); border-right:1px solid var(--line); display:flex; flex-direction:column; }
+  #side header { padding:12px 14px; border-bottom:1px solid var(--line); }
+  #side h1 { font-size:15px; margin:0 0 2px; }
+  #side .sub { color:var(--muted); font-size:12px; }
+  #controls { padding:10px 14px; border-bottom:1px solid var(--line); display:grid; gap:8px; }
+  #controls .row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  button, select { font:inherit; padding:4px 8px; border:1px solid var(--line); background:var(--bg); color:var(--ink); border-radius:4px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  #tree { overflow:auto; flex:1; padding:6px 8px 20px; }
+  details { margin:2px 0; }
+  summary { cursor:pointer; padding:3px 4px; font-weight:600; }
+  .item { display:flex; align-items:center; gap:6px; padding:2px 4px 2px 18px; border-radius:3px; }
+  .item.sel { background:color-mix(in srgb, var(--accent) 18%, transparent); }
+  .item span { cursor:pointer; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .g { font-size:10px; font-weight:700; padding:0 4px; border-radius:3px; color:#fff; }
+  #main { flex:1; position:relative; min-width:0; }
+  canvas { display:block; }
+  #info { position:absolute; right:12px; top:12px; width:320px; max-height:calc(100% - 24px); overflow:auto; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:10px 12px; display:none; }
+  #info h2 { font-size:14px; margin:0 0 6px; }
+  #info table { border-collapse:collapse; width:100%; font-size:12px; }
+  #info td { border-top:1px solid var(--line); padding:3px 4px; vertical-align:top; }
+  #info td:first-child { color:var(--muted); width:90px; }
+  #banner { position:absolute; left:12px; bottom:12px; background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:6px 10px; font-size:12px; color:var(--muted); max-width:60%; }
+  #legend { display:flex; gap:6px; flex-wrap:wrap; }
+  @media (max-width: 760px) {
+    body { flex-direction:column; }
+    #side { width:100%; min-width:0; height:42vh; border-right:0; border-bottom:1px solid var(--line); }
+    #info { width:calc(100% - 24px); }
+  }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<aside id="side">
+  <header><h1 id="title">Building</h1><div class="sub" id="subtitle"></div></header>
+  <div id="controls">
+    <div class="row">
+      <button id="showAll" title="Show every element">Show all</button>
+      <button id="isolate" title="Show only the selected element">Isolate selected</button>
+      <button id="hideSel" title="Hide the selected element">Hide selected</button>
+    </div>
+    <div class="row">
+      <label>Colour <select id="colorMode"><option value="material">Material</option><option value="grade">Evidence grade</option></select></label>
+      <button id="fit">Fit view</button>
+    </div>
+    <div class="row">
+      <label style="flex:1">Section height <input id="cut" type="range" min="0" max="100" value="100" style="width:100%"></label>
+      <span id="cutVal" style="width:52px;text-align:right">off</span>
+    </div>
+    <div class="row" id="legend"></div>
+    <div class="row"><label>Load other building.json <input id="file" type="file" accept=".json"></label></div>
+  </div>
+  <div id="tree"></div>
+</aside>
+<main id="main">
+  <div id="info"></div>
+  <div id="banner"></div>
+</main>
+<script id="building-data" type="application/json">/*BUILDING_JSON*/</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const GRADE = { A:'#2e7d32', B:'#1565c0', C:'#ef6c00', D:'#c62828' };
+const MAT = { wall:'#e8dcc6', opening:'#9fc3d9', door:'#7a5a3a', floor:'#b9b2a6', roof:'#9c4a3a', ornament:'#d8d2c4', statue:'#cfc8b8' };
+
+const main = document.getElementById('main');
+const renderer = new THREE.WebGLRenderer({ antialias:true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.localClippingEnabled = true;
+main.prepend(renderer.domElement);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8d7f6a, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6); sun.position.set(30, 50, 25); scene.add(sun);
+const grid = new THREE.GridHelper(200, 200, 0x999999, 0xcccccc); grid.material.opacity = 0.35; grid.material.transparent = true; scene.add(grid);
+const clip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 1e6);
+
+let root = new THREE.Group(); scene.add(root);
+const elements = new Map();   // id -> { obj, data, kind, base }
+let selected = null, colorMode = 'material', model = null, maxZ = 10;
+
+function setBg() {
+  const css = getComputedStyle(document.documentElement);
+  scene.background = new THREE.Color(css.getPropertyValue('--bg').trim() || '#f4f2ee');
+}
+setBg();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', setBg);
+
+function mat(color, opts = {}) {
+  return new THREE.MeshStandardMaterial({ color, roughness:0.85, side:THREE.DoubleSide, clippingPlanes:[clip], ...opts });
+}
+// plan (x east, y north) -> three (x, z = -y), height -> y
+const V = (x, y, z) => new THREE.Vector3(x, z, -y);
+
+function register(id, obj, data, kind, base) {
+  obj.userData.id = id;
+  obj.traverse(o => { if (o.isMesh) o.userData.id = id; });
+  elements.set(id, { obj, data, kind, base });
+}
+
+function floorOf(w) { return model.floors.find(f => f.id === w.floor); }
+function wallZ(w) {
+  const f = floorOf(w);
+  const z0 = w.z0 ?? (f ? f.z : 0);
+  return [z0, w.z1 ?? (f ? f.z + f.height : z0 + 3)];
+}
+
+function buildWall(w) {
+  const [ax, ay] = w.from, [bx, by] = w.to;
+  const L = Math.hypot(bx - ax, by - ay);
+  const [z0, z1] = wallZ(w);
+  const H = z1 - z0;
+  const shape = new THREE.Shape([new THREE.Vector2(0, 0), new THREE.Vector2(L, 0), new THREE.Vector2(L, H), new THREE.Vector2(0, H)]);
+  const group = new THREE.Group();
+  group.position.copy(V(ax, ay, z0));
+  group.rotation.y = Math.atan2(by - ay, bx - ax);
+  const ops = (model.openings || []).filter(o => o.wall === w.id);
+  for (const o of ops) {
+    if (o.type === 'niche') continue;
+    const hole = new THREE.Path();
+    const x0 = o.offset, x1 = o.offset + o.width, s = o.sill, t = o.sill + o.height;
+    if (o.type === 'arch') {
+      const r = o.width / 2;
+      hole.moveTo(x0, s); hole.lineTo(x1, s); hole.lineTo(x1, t - r);
+      hole.absarc(x0 + r, t - r, r, 0, Math.PI, false); hole.lineTo(x0, s);
+    } else {
+      hole.moveTo(x0, s); hole.lineTo(x1, s); hole.lineTo(x1, t); hole.lineTo(x0, t); hole.lineTo(x0, s);
+    }
+    shape.holes.push(hole);
+  }
+  const geo = new THREE.ExtrudeGeometry(shape, { depth:w.thickness, bevelEnabled:false, curveSegments:16 });
+  geo.translate(0, 0, -w.thickness / 2);
+  const mesh = new THREE.Mesh(geo, mat(MAT.wall));
+  group.add(mesh);
+  register(w.id, mesh, w, 'Walls', MAT.wall);
+  for (const o of ops) {
+    const depth = o.type === 'niche' ? w.thickness * 0.4 : w.thickness * 0.15;
+    const color = o.type === 'window' ? MAT.opening : o.type === 'niche' ? '#bdb5a5' : MAT.door;
+    const pane = new THREE.Mesh(new THREE.BoxGeometry(o.width * 0.98, o.height * 0.98, depth),
+      mat(color, o.type === 'window' ? { transparent:true, opacity:0.55 } : {}));
+    pane.position.set(o.offset + o.width / 2, o.sill + o.height / 2, o.type === 'niche' ? -w.thickness / 2 - depth / 2 : 0);
+    group.add(pane);
+    register(o.id, pane, o, 'Openings', color);
+  }
+  root.add(group);
+}
+
+function buildFloor(f) {
+  const pts = model.walls.filter(w => w.floor === f.id).map(w => w.from);
+  if (pts.length < 3) return;
+  const shape = new THREE.Shape(pts.map(p => new THREE.Vector2(p[0], p[1])));
+  const slab = f.slab ?? 0.3;
+  const geo = new THREE.ExtrudeGeometry(shape, { depth:slab, bevelEnabled:false });
+  const mesh = new THREE.Mesh(geo, mat(MAT.floor));
+  mesh.rotation.x = -Math.PI / 2;
+  mesh.position.y = f.z - slab;
+  root.add(mesh);
+  register('slab-' + f.id, mesh, { id:'slab-' + f.id, name:f.name + ' slab', z:f.z, thickness:slab }, 'Floors', MAT.floor);
+}
+
+function buildRoof(r) {
+  if (!r) return;
+  const fp = r.footprint || model.walls.filter(w => w.floor === model.floors.at(-1).id).map(w => w.from);
+  let geo;
+  if (r.type === 'flat' || fp.length !== 4) {
+    const shape = new THREE.Shape(fp.map(p => new THREE.Vector2(p[0], p[1])));
+    geo = new THREE.ExtrudeGeometry(shape, { depth:0.3, bevelEnabled:false });
+    const mesh = new THREE.Mesh(geo, mat(MAT.roof));
+    mesh.rotation.x = -Math.PI / 2; mesh.position.y = r.eaves;
+    root.add(mesh); register('roof', mesh, { id:'roof', name:'Roof', ...r }, 'Roof', MAT.roof);
+    return;
+  }
+  const P = fp.map(p => new THREE.Vector2(p[0], p[1]));
+  let e1 = P[1].clone().sub(P[0]), e2 = P[3].clone().sub(P[0]);
+  let [p0, p1, p2, p3] = P;
+  if (e2.length() > e1.length()) { [p0, p1, p2, p3] = [P[1], P[2], P[3], P[0]]; e1 = p1.clone().sub(p0); e2 = p3.clone().sub(p0); }
+  const half = e2.clone().multiplyScalar(0.5);
+  let m0 = p0.clone().add(half), m1 = p1.clone().add(half);
+  if (r.type === 'hip') {
+    const d = e1.clone().normalize().multiplyScalar(Math.min(e2.length() / 2, e1.length() / 2 - 0.01));
+    m0.add(d); m1.sub(d);
+  }
+  const E = r.eaves, R = r.ridge;
+  const a = [V(p0.x, p0.y, E), V(p1.x, p1.y, E), V(p2.x, p2.y, E), V(p3.x, p3.y, E)];
+  const ra = V(m0.x, m0.y, R), rb = V(m1.x, m1.y, R);
+  const tris = [a[0], a[1], rb, a[0], rb, ra, a[2], a[3], ra, a[2], ra, rb, a[1], a[2], rb, a[3], a[0], ra];
+  geo = new THREE.BufferGeometry().setFromPoints(tris);
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, mat(MAT.roof));
+  root.add(mesh); register('roof', mesh, { id:'roof', name:'Roof (' + r.type + ')', ...r }, 'Roof', MAT.roof);
+}
+
+function buildOrnament(o) {
+  const [x, y, z] = o.position, [w, d, h] = o.size;
+  const group = new THREE.Group();
+  group.position.copy(V(x, y, z));
+  const wall = model.walls.find(ww => ww.id === o.wall);
+  if (wall) group.rotation.y = Math.atan2(wall.to[1] - wall.from[1], wall.to[0] - wall.from[0]);
+  const color = o.type === 'statue' ? MAT.statue : MAT.ornament;
+  if (o.type === 'statue') {
+    // placeholder figure: plinth + body + head; replaced by o.model when present
+    const plinth = new THREE.Mesh(new THREE.BoxGeometry(w, h * 0.12, d), mat(color)); plinth.position.y = h * 0.06;
+    const body = new THREE.Mesh(new THREE.CylinderGeometry(w * 0.22, w * 0.32, h * 0.62, 16), mat(color)); body.position.y = h * 0.12 + h * 0.31;
+    const head = new THREE.Mesh(new THREE.SphereGeometry(h * 0.085, 16, 12), mat(color)); head.position.y = h * 0.86;
+    group.add(plinth, body, head);
+  } else {
+    const box = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color)); box.position.y = h / 2; group.add(box);
+  }
+  root.add(group);
+  register(o.id, group, o, 'Ornaments & sculpture', color);
+  if (o.model) {
+    new GLTFLoader().load(o.model, gltf => {
+      const m = gltf.scene;
+      const box = new THREE.Box3().setFromObject(m), size = box.getSize(new THREE.Vector3());
+      m.scale.setScalar(h / (size.y || 1));
+      const b2 = new THREE.Box3().setFromObject(m);
+      m.position.y -= b2.min.y;
+      m.traverse(c => { if (c.isMesh) { c.material.clippingPlanes = [clip]; c.material.side = THREE.DoubleSide; } });
+      group.clear(); group.add(m);
+      register(o.id, group, o, 'Ornaments & sculpture', null);
+      applyColors();
+    }, undefined, err => console.warn('Model not loaded for ' + o.id + ':', err.message || err));
+  }
+}
+
+function eachMesh(id, fn) { const e = elements.get(id); if (e) e.obj.traverse(o => { if (o.isMesh) fn(o, e); }); }
+
+function applyColors() {
+  for (const [id, e] of elements) {
+    eachMesh(id, (m) => {
+      if (e.base === null && colorMode === 'material') return;  // loaded mesh keeps its own material
+      const c = colorMode === 'grade' ? (GRADE[e.data.confidence] || '#888') : e.base;
+      m.material.color.set(c);
+      m.material.emissive?.set(id === selected ? 0x333300 : 0x000000);
+    });
+  }
+}
+
+function buildTree() {
+  const tree = document.getElementById('tree'); tree.innerHTML = '';
+  const groups = {};
+  for (const [id, e] of elements) (groups[e.kind] ||= []).push([id, e]);
+  for (const [kind, items] of Object.entries(groups)) {
+    const det = document.createElement('details'); det.open = kind !== 'Openings';
+    const sum = document.createElement('summary');
+    const gcb = document.createElement('input'); gcb.type = 'checkbox'; gcb.checked = true;
+    gcb.onclick = ev => { ev.stopPropagation(); items.forEach(([id]) => setVisible(id, gcb.checked)); };
+    sum.append(gcb, ' ' + kind + ' (' + items.length + ')'); det.append(sum);
+    for (const [id, e] of items) {
+      const row = document.createElement('div'); row.className = 'item'; row.dataset.id = id;
+      const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = e.obj.visible; cb.dataset.id = id;
+      cb.onchange = () => setVisible(id, cb.checked);
+      const label = document.createElement('span'); label.textContent = id + (e.data.name ? ' — ' + e.data.name : e.data.type ? ' — ' + e.data.type : '');
+      label.title = label.textContent; label.onclick = () => select(id);
+      row.append(cb, label);
+      if (e.data.confidence) { const g = document.createElement('b'); g.className = 'g'; g.style.background = GRADE[e.data.confidence]; g.textContent = e.data.confidence; row.append(g); }
+      det.append(row);
+    }
+    tree.append(det);
+  }
+}
+
+function setVisible(id, v) {
+  const e = elements.get(id); if (!e) return;
+  e.obj.visible = v;
+  document.querySelectorAll(`input[data-id="${CSS.escape(id)}"]`).forEach(cb => cb.checked = v);
+}
+
+function select(id) {
+  selected = id;
+  document.querySelectorAll('.item').forEach(r => r.classList.toggle('sel', r.dataset.id === id));
+  applyColors();
+  const info = document.getElementById('info');
+  const e = elements.get(id);
+  if (!e) { info.style.display = 'none'; return; }
+  const srcs = (e.data.sources || []).map(s => {
+    const src = (model.sources || []).find(x => x.id === s);
+    if (!src) return s;
+    const t = src.title.replace(/</g, '&lt;');
+    return src.url ? `${s}: <a href="${encodeURI(src.url)}" target="_blank" rel="noopener">${t}</a>` : `${s}: ${t}`;
+  }).join('<br>') || '<i>none</i>';
+  const rows = Object.entries(e.data).filter(([k]) => !['sources', 'id'].includes(k))
+    .map(([k, v]) => `<tr><td>${k}</td><td>${String(typeof v === 'object' ? JSON.stringify(v) : v).replace(/</g, '&lt;')}</td></tr>`).join('');
+  info.innerHTML = `<h2>${id}</h2><table>${rows}<tr><td>sources</td><td>${srcs}</td></tr></table>`;
+  info.style.display = 'block';
+}
+
+function fit() {
+  const box = new THREE.Box3();
+  for (const e of elements.values()) if (e.obj.visible) box.expandByObject(e.obj);
+  if (box.isEmpty()) return;
+  const c = box.getCenter(new THREE.Vector3()), r = box.getSize(new THREE.Vector3()).length() / 2;
+  controls.target.copy(c);
+  camera.position.copy(c).add(new THREE.Vector3(r * 1.2, r * 0.8, r * 1.6));
+  camera.near = r / 100; camera.far = r * 50; camera.updateProjectionMatrix();
+}
+
+function load(data) {
+  model = data;
+  scene.remove(root); root = new THREE.Group(); scene.add(root); elements.clear(); selected = null;
+  (model.floors || []).forEach(buildFloor);
+  (model.walls || []).forEach(buildWall);
+  buildRoof(model.roof);
+  (model.ornaments || []).forEach(buildOrnament);
+  maxZ = Math.max(1, ...(model.floors || []).map(f => f.z + f.height), model.roof?.ridge || 0);
+  const m = model.meta || {};
+  document.getElementById('title').textContent = m.name || 'Building';
+  document.getElementById('subtitle').textContent = [m.address, m.postal, m.state].filter(Boolean).join(' · ');
+  document.getElementById('banner').textContent = 'Reconstruction — ' + (m.disclaimer || 'not a measured survey.');
+  document.getElementById('info').style.display = 'none';
+  buildTree(); applyColors(); fit();
+}
+
+// controls
+document.getElementById('showAll').onclick = () => { for (const id of elements.keys()) setVisible(id, true); };
+document.getElementById('isolate').onclick = () => { if (!selected) return; for (const id of elements.keys()) setVisible(id, id === selected); fit(); };
+document.getElementById('hideSel').onclick = () => { if (selected) setVisible(selected, false); };
+document.getElementById('fit').onclick = fit;
+document.getElementById('colorMode').onchange = ev => { colorMode = ev.target.value; applyColors(); };
+const cut = document.getElementById('cut');
+cut.oninput = () => {
+  const v = +cut.value;
+  if (v >= 100) { clip.constant = 1e6; document.getElementById('cutVal').textContent = 'off'; return; }
+  const z = maxZ * v / 100; clip.constant = z;
+  document.getElementById('cutVal').textContent = '+' + z.toFixed(2);
+};
+document.getElementById('file').onchange = async ev => {
+  const f = ev.target.files[0]; if (f) load(JSON.parse(await f.text()));
+};
+const legend = document.getElementById('legend');
+for (const [g, c] of Object.entries(GRADE)) legend.insertAdjacentHTML('beforeend', `<span><b class="g" style="background:${c}">${g}</b> ${{A:'documented',B:'measured',C:'inferred',D:'speculative'}[g]}</span>`);
+
+// picking
+const ray = new THREE.Raycaster(), ptr = new THREE.Vector2();
+let down = null;
+renderer.domElement.addEventListener('pointerdown', e => down = [e.clientX, e.clientY]);
+renderer.domElement.addEventListener('pointerup', e => {
+  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 4) return;
+  const r = renderer.domElement.getBoundingClientRect();
+  ptr.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1);
+  ray.setFromCamera(ptr, camera);
+  const hits = ray.intersectObjects(root.children, true).filter(h => {
+    let o = h.object; while (o) { if (!o.visible) return false; o = o.parent; }
+    return h.point.y <= clip.constant;
+  });
+  if (hits.length) select(hits[0].object.userData.id);
+});
+
+function resize() {
+  const w = main.clientWidth, h = main.clientHeight;
+  renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+renderer.setAnimationLoop(() => { controls.update(); renderer.render(scene, camera); });
+
+const raw = document.getElementById('building-data').textContent.trim();
+try { load(JSON.parse(raw)); } catch (err) { document.getElementById('banner').textContent = 'No embedded building.json — use “Load other building.json”.'; }
+window.__viewer = { elements, select, setVisible, fit };
+</script>
+</body>
+</html>
