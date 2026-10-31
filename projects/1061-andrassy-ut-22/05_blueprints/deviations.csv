@@ -1,0 +1,7 @@
+element,original,reconstruction,difference,note
+Body length rear wall → front face,≈111.4 m (1879 plan at 0.0721 m/px),108.28 m (OSM as built),−3.1 m (−2.8 %),plan length scale differs from width scale; exterior kept to OSM; interior positions rescaled along the axis
+Main body width,689 px → 49.66 m (calibration),49.66 m (OSM),0,used as calibration
+Pavilion width,745 px → 53.7 m,53.2 m (OSM),−0.5 m (−0.9 %),within reading error
+Side carriage porch extent along axis,u 41.6–60.0 (plan),u 40.4–58.3 (plan rescaled) / u 39.1–55.2 (side elevation),≈ 2–5 m between drawings,plan used
+Front porch depth,≈ 8 m incl. steps (plan),6.5 m (side elevation c.1879),−1.5 m,113.22 m total (S15) would imply 4.9 m
+Overall height,50.69 m (S15),47.0 m to lantern tip (S4/S7),−3.7 m,datum of S15 value unknown

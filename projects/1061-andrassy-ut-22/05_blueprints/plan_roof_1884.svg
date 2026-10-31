@@ -1,0 +1,287 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297" font-family="Helvetica, Arial, sans-serif">
+<rect width="420" height="297" fill="#fff"/>
+<polygon points="5.00,5.00 415.00,5.00 415.00,292.00 5.00,292.00" fill="none" stroke="#000" stroke-width="0.5"/>
+<polygon points="320.00,5.00 415.00,5.00 415.00,292.00 320.00,292.00" fill="none" stroke="#000" stroke-width="0.5"/>
+<text x="325.00" y="16.00" font-size="4.0" text-anchor="start" font-weight="bold" fill="#000">Magyar Állami Operaház (Hungarian </text>
+<text x="325.00" y="21.50" font-size="4.0" text-anchor="start" font-weight="bold" fill="#000">State Opera House)</text>
+<text x="325.00" y="28.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">Andrássy út 22., Budapest</text>
+<text x="325.00" y="33.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">1061 VI. kerület</text>
+<text x="325.00" y="38.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">Parcel (hrsz.): —</text>
+<text x="325.00" y="43.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">State shown: 1884</text>
+<text x="325.00" y="48.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">Built: 1875–1884 (opened 27 Sep 1884)</text>
+<text x="325.00" y="53.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">Architect: Ybl Miklós</text>
+<line x1="320.00" y1="61.50" x2="415.00" y2="61.50" stroke="#000" stroke-width="0.35"/>
+<text x="325.00" y="69.50" font-size="3.6" text-anchor="start" font-weight="bold" fill="#000">Roof plan</text>
+<text x="325.00" y="75.50" font-size="2.8" text-anchor="start" font-weight="normal" fill="#000">Scale 1:500 (A3)</text>
+<text x="325.00" y="80.50" font-size="2.4" text-anchor="start" font-weight="normal" fill="#000">Generated 2026-10-31</text>
+<text x="325.00" y="89.50" font-size="2.8" text-anchor="start" font-weight="bold" fill="#000">Evidence grade (line colour)</text>
+<polygon points="325.00,92.00 331.00,92.00 331.00,94.50 325.00,94.50" fill="#c8e6c9" stroke="#2e7d32" stroke-width="0.5"/>
+<text x="334.00" y="94.50" font-size="2.6" text-anchor="start" font-weight="normal" fill="#000">A — documented</text>
+<polygon points="325.00,97.00 331.00,97.00 331.00,99.50 325.00,99.50" fill="#bbdefb" stroke="#1565c0" stroke-width="0.5"/>
+<text x="334.00" y="99.50" font-size="2.6" text-anchor="start" font-weight="normal" fill="#000">B — measured</text>
+<polygon points="325.00,102.00 331.00,102.00 331.00,104.50 325.00,104.50" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.5"/>
+<text x="334.00" y="104.50" font-size="2.6" text-anchor="start" font-weight="normal" fill="#000">C — inferred</text>
+<polygon points="325.00,107.00 331.00,107.00 331.00,109.50 325.00,109.50" fill="#ffcdd2" stroke="#c62828" stroke-width="0.5"/>
+<text x="334.00" y="109.50" font-size="2.6" text-anchor="start" font-weight="normal" fill="#000">D — speculative</text>
+<text x="325.00" y="275.00" font-size="3.4" text-anchor="start" font-weight="bold" fill="#c62828">RECONSTRUCTION</text>
+<text x="325.00" y="280.00" font-size="3.0" text-anchor="start" font-weight="bold" fill="#c62828">NOT A MEASURED SURVEY</text>
+<text x="325.00" y="286.00" font-size="2.0" text-anchor="start" font-weight="normal" fill="#000">Reconstruction from Ybl&#x27;s 1879 plans, archive photos</text>
+<text x="325.00" y="289.00" font-size="2.0" text-anchor="start" font-weight="normal" fill="#000"> and OSM; massing and main spaces, not a survey.</text>
+<line x1="237.02" y1="86.04" x2="220.78" y2="86.06" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.78" y1="86.06" x2="220.76" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.76" y1="90.34" x2="82.98" y2="90.36" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="90.36" x2="82.98" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="86.00" x2="65.88" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.88" y1="86.00" x2="65.90" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.90" y1="90.58" x2="58.56" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="90.58" x2="58.56" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="107.22" x2="55.22" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="107.22" x2="55.22" y2="170.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="170.60" x2="58.60" y2="170.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="170.58" x2="58.60" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="188.62" x2="65.54" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.54" y1="188.62" x2="65.56" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.56" y1="192.40" x2="85.42" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="192.40" x2="85.42" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="189.66" x2="219.72" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="189.66" x2="219.72" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="191.60" x2="238.62" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.62" y1="191.60" x2="238.64" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.64" y1="188.88" x2="244.50" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="188.88" x2="244.50" y2="170.50" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="170.50" x2="271.78" y2="170.48" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="170.48" x2="271.78" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="108.84" x2="244.48" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="108.84" x2="244.48" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="90.12" x2="237.02" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="90.12" x2="237.02" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="86.04" x2="220.78" y2="86.06" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.78" y1="86.06" x2="220.76" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.76" y1="90.34" x2="82.98" y2="90.36" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="90.36" x2="82.98" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="86.00" x2="65.88" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.88" y1="86.00" x2="65.90" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.90" y1="90.58" x2="58.56" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="90.58" x2="58.56" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="107.22" x2="55.22" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="107.22" x2="55.22" y2="170.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="170.60" x2="58.60" y2="170.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="170.58" x2="58.60" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="188.62" x2="65.54" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.54" y1="188.62" x2="65.56" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.56" y1="192.40" x2="85.42" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="192.40" x2="85.42" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="189.66" x2="219.72" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="189.66" x2="219.72" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="191.60" x2="238.62" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.62" y1="191.60" x2="238.64" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.64" y1="188.88" x2="244.50" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="188.88" x2="244.50" y2="170.50" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="170.50" x2="271.78" y2="170.48" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="170.48" x2="271.78" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="108.84" x2="244.48" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="108.84" x2="244.48" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="90.12" x2="237.02" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="90.12" x2="237.02" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="86.04" x2="220.78" y2="86.06" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.78" y1="86.06" x2="220.76" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.76" y1="90.34" x2="82.98" y2="90.36" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="90.36" x2="82.98" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="86.00" x2="65.88" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.88" y1="86.00" x2="65.90" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.90" y1="90.58" x2="58.56" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="90.58" x2="58.56" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="107.22" x2="55.22" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="107.22" x2="55.22" y2="170.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="170.60" x2="58.60" y2="170.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="170.58" x2="58.60" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="188.62" x2="65.54" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.54" y1="188.62" x2="65.56" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.56" y1="192.40" x2="85.42" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="192.40" x2="85.42" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="189.66" x2="219.72" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="189.66" x2="219.72" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="191.60" x2="238.62" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.62" y1="191.60" x2="238.64" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.64" y1="188.88" x2="244.50" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="188.88" x2="244.50" y2="170.50" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="170.50" x2="271.78" y2="170.48" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="170.48" x2="271.78" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="108.84" x2="244.48" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="108.84" x2="244.48" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="90.12" x2="237.02" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="90.12" x2="237.02" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="86.04" x2="220.78" y2="86.06" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.78" y1="86.06" x2="220.76" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="220.76" y1="90.34" x2="82.98" y2="90.36" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="90.36" x2="82.98" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="82.98" y1="86.00" x2="65.88" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.88" y1="86.00" x2="65.90" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.90" y1="90.58" x2="58.56" y2="90.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="90.58" x2="58.56" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.56" y1="107.22" x2="55.22" y2="107.22" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="107.22" x2="55.22" y2="170.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="170.60" x2="58.60" y2="170.58" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="170.58" x2="58.60" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="58.60" y1="188.62" x2="65.54" y2="188.62" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.54" y1="188.62" x2="65.56" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="65.56" y1="192.40" x2="85.42" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="192.40" x2="85.42" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="189.66" x2="219.72" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="189.66" x2="219.72" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="191.60" x2="238.62" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.62" y1="191.60" x2="238.64" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="238.64" y1="188.88" x2="244.50" y2="188.88" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="188.88" x2="244.50" y2="170.50" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="170.50" x2="271.78" y2="170.48" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="170.48" x2="271.78" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="271.78" y1="108.84" x2="244.48" y2="108.84" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="108.84" x2="244.48" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.48" y1="90.12" x2="237.02" y2="90.12" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="237.02" y1="90.12" x2="237.02" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="191.60" x2="244.50" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="191.60" x2="244.50" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="86.04" x2="219.72" y2="86.04" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="219.72" y1="86.04" x2="219.72" y2="191.60" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="192.40" x2="85.42" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="192.40" x2="85.42" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="85.42" y1="86.00" x2="55.22" y2="86.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="55.22" y1="86.00" x2="55.22" y2="192.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="127.42" y1="189.66" x2="172.62" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="172.62" y1="189.66" x2="172.62" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="172.62" y1="170.20" x2="127.42" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="127.42" y1="170.20" x2="127.42" y2="189.66" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="127.42" y1="108.20" x2="172.62" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="172.62" y1="108.20" x2="172.62" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="172.62" y1="90.34" x2="127.42" y2="90.34" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="127.42" y1="90.34" x2="127.42" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="95.42" y1="170.20" x2="209.82" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="209.82" y1="170.20" x2="209.82" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="209.82" y1="108.20" x2="95.42" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="95.42" y1="108.20" x2="95.42" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="168.00" x2="267.22" y2="168.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="267.22" y1="168.00" x2="267.22" y2="111.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="267.22" y1="111.40" x2="244.50" y2="111.40" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="244.50" y1="111.40" x2="244.50" y2="168.00" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="95.42" y1="170.20" x2="209.82" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="209.82" y1="170.20" x2="209.82" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="209.82" y1="108.20" x2="95.42" y2="108.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<line x1="95.42" y1="108.20" x2="95.42" y2="170.20" stroke="#999" stroke-width="0.25" stroke-dasharray="1,1"/>
+<polygon points="95.42,170.20 209.82,170.20 203.42,163.80 101.82,163.80" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="209.82,170.20 209.82,108.20 203.42,114.60 203.42,163.80" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="209.82,108.20 95.42,108.20 101.82,114.60 203.42,114.60" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="95.42,108.20 95.42,170.20 101.82,163.80 101.82,114.60" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="101.82,163.80 203.42,163.80 203.42,114.60 101.82,114.60" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="152.62" y="139.20" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_HIGH mansard</text>
+<text x="152.62" y="142.40" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +33.40 / top +42.20</text>
+<polygon points="182.58,140.70 182.58,138.26 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="182.58,138.26 180.85,136.52 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="180.85,136.52 178.40,136.52 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="178.40,136.52 176.66,138.26 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="176.66,138.26 176.66,140.71 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="176.66,140.71 178.40,142.44 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="178.40,142.44 180.85,142.44 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="180.85,142.44 182.58,140.70 179.62,139.48" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="179.62" y="139.48" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_LANT_AUD pyramid</text>
+<text x="179.62" y="142.68" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +44.80 / top +47.00</text>
+<polygon points="123.58,140.70 123.58,138.26 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="123.58,138.26 121.84,136.52 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="121.84,136.52 119.39,136.52 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="119.39,136.52 117.66,138.26 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="117.66,138.26 117.66,140.71 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="117.66,140.71 119.39,142.44 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="119.39,142.44 121.84,142.44 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="121.84,142.44 123.58,140.70 120.62,139.48" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="120.62" y="139.48" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_LANT_STG pyramid</text>
+<text x="120.62" y="142.68" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +44.80 / top +47.00</text>
+<polygon points="244.50,170.20 244.50,108.20 230.36,122.34 230.36,156.06" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="216.22,108.20 216.22,170.20 230.36,156.06 230.36,122.34" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="244.50,108.20 216.22,108.20 230.36,122.34" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="216.22,170.20 244.50,170.20 230.36,156.06" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="230.36" y="139.20" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_HALL hip</text>
+<text x="230.36" y="142.40" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +27.40 / top +30.70</text>
+<polygon points="219.72,191.60 244.50,191.60 233.80,180.90 230.42,180.90" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="244.50,170.20 219.72,170.20 230.42,180.90 233.80,180.90" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="244.50,191.60 244.50,170.20 233.80,180.90" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,170.20 219.72,191.60 230.42,180.90" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="232.11" y="180.90" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_PAV_FH hip</text>
+<text x="232.11" y="184.10" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +27.40 / top +30.80</text>
+<polygon points="219.72,108.20 244.50,108.20 233.42,97.12 230.80,97.12" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="244.50,86.04 219.72,86.04 230.80,97.12 233.42,97.12" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="244.50,108.20 244.50,86.04 233.42,97.12" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,86.04 219.72,108.20 230.80,97.12" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="232.11" y="97.12" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_PAV_FD hip</text>
+<text x="232.11" y="100.32" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +27.40 / top +30.80</text>
+<polygon points="85.42,192.40 85.42,86.00 70.32,101.10 70.32,177.30" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="55.22,86.00 55.22,192.40 70.32,177.30 70.32,101.10" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="85.42,86.00 55.22,86.00 70.32,101.10" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="55.22,192.40 85.42,192.40 70.32,177.30" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="70.32" y="139.20" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_REAR hip</text>
+<text x="70.32" y="142.40" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +27.40 / top +31.30</text>
+<polygon points="85.42,189.66 127.42,189.66 117.69,179.93 95.15,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="127.42,170.20 85.42,170.20 95.15,179.93 117.69,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="127.42,189.66 127.42,170.20 117.69,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="85.42,170.20 85.42,189.66 95.15,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="106.42" y="179.93" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_WING_H1 hip</text>
+<text x="106.42" y="183.13" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +21.30 / top +25.50</text>
+<polygon points="127.42,189.66 172.62,189.66 162.89,179.93 137.15,179.93" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="172.62,170.20 127.42,170.20 137.15,179.93 162.89,179.93" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="172.62,189.66 172.62,170.20 162.89,179.93" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="127.42,170.20 127.42,189.66 137.15,179.93" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="150.02" y="179.93" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_WING_H2 hip</text>
+<text x="150.02" y="183.13" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +27.00 / top +30.30</text>
+<polygon points="172.62,189.66 219.72,189.66 209.99,179.93 182.35,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,170.20 172.62,170.20 182.35,179.93 209.99,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,189.66 219.72,170.20 209.99,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="172.62,170.20 172.62,189.66 182.35,179.93" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="196.17" y="179.93" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_WING_H3 hip</text>
+<text x="196.17" y="183.13" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +21.30 / top +25.50</text>
+<polygon points="85.42,108.20 127.42,108.20 118.49,99.27 94.35,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="127.42,90.34 85.42,90.34 94.35,99.27 118.49,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="127.42,108.20 127.42,90.34 118.49,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="85.42,90.34 85.42,108.20 94.35,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="106.42" y="99.27" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_WING_D1 hip</text>
+<text x="106.42" y="102.47" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +21.30 / top +25.50</text>
+<polygon points="127.42,108.20 172.62,108.20 163.69,99.27 136.35,99.27" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="172.62,90.34 127.42,90.34 136.35,99.27 163.69,99.27" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="172.62,108.20 172.62,90.34 163.69,99.27" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<polygon points="127.42,90.34 127.42,108.20 136.35,99.27" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="150.02" y="99.27" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_WING_D2 hip</text>
+<text x="150.02" y="102.47" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +27.00 / top +30.30</text>
+<polygon points="172.62,108.20 219.72,108.20 210.79,99.27 181.55,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,90.34 172.62,90.34 181.55,99.27 210.79,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="219.72,108.20 219.72,90.34 210.79,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<polygon points="172.62,90.34 172.62,108.20 181.55,99.27" fill="#ffe0b2" stroke="#ef6c00" stroke-width="0.3"/>
+<text x="196.17" y="99.27" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#ef6c00">RF_WING_D3 hip</text>
+<text x="196.17" y="102.47" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#ef6c00">eaves +21.30 / top +25.50</text>
+<polygon points="244.50,170.50 271.78,170.50 271.78,108.84 244.50,108.84" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="258.14" y="139.67" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_FRONT flat</text>
+<text x="258.14" y="142.87" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +21.30 / top +21.30</text>
+<polygon points="244.50,168.00 267.22,168.00 267.22,111.40 244.50,111.40" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="255.86" y="139.70" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_FRONT_ATTIC flat</text>
+<text x="255.86" y="142.90" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +27.40 / top +27.40</text>
+<polygon points="271.78,157.60 284.78,157.60 284.78,121.60 271.78,121.60" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="278.28" y="139.60" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_PORCH flat</text>
+<text x="278.28" y="142.80" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +9.80 / top +9.80</text>
+<polygon points="136.02,200.26 171.82,200.26 171.82,189.66 136.02,189.66" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="153.92" y="194.96" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_SPORCH_H flat</text>
+<text x="153.92" y="198.16" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +10.30 / top +10.30</text>
+<polygon points="136.02,90.34 171.82,90.34 171.82,79.74 136.02,79.74" fill="#bbdefb" stroke="#1565c0" stroke-width="0.3"/>
+<text x="153.92" y="85.04" font-size="2.4" text-anchor="middle" font-weight="bold" fill="#1565c0">RF_SPORCH_D flat</text>
+<text x="153.92" y="88.24" font-size="2.0" text-anchor="middle" font-weight="normal" fill="#1565c0">eaves +10.30 / top +10.30</text>
+<g transform="rotate(-49.42 25 27)">
+<polygon points="25.00,20.00 27.50,28.00 25.00,26.00 22.50,28.00" fill="#000" stroke="#000" stroke-width="0.25"/>
+<text x="25.00" y="33.00" font-size="3" text-anchor="middle" font-weight="bold" fill="#000">N</text>
+</g>
+<polygon points="20.00,277.00 30.00,277.00 30.00,278.50 20.00,278.50" fill="#000" stroke="#000" stroke-width="0.2"/>
+<text x="20.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">0</text>
+<polygon points="30.00,277.00 40.00,277.00 40.00,278.50 30.00,278.50" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="30.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">5</text>
+<polygon points="40.00,277.00 50.00,277.00 50.00,278.50 40.00,278.50" fill="#000" stroke="#000" stroke-width="0.2"/>
+<text x="40.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">10</text>
+<polygon points="50.00,277.00 60.00,277.00 60.00,278.50 50.00,278.50" fill="#fff" stroke="#000" stroke-width="0.2"/>
+<text x="50.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">15</text>
+<polygon points="60.00,277.00 70.00,277.00 70.00,278.50 60.00,278.50" fill="#000" stroke="#000" stroke-width="0.2"/>
+<text x="60.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">20</text>
+<text x="70.00" y="281.50" font-size="2.2" text-anchor="middle" font-weight="normal" fill="#000">25 m</text>
+</svg>

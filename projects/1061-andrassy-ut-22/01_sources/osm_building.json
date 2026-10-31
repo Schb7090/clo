@@ -1,0 +1,208 @@
+{
+  "type": "way",
+  "id": 24000390,
+  "bounds": {
+    "minlat": 47.5023739,
+    "minlon": 19.0575063,
+    "maxlat": 47.5033347,
+    "maxlon": 19.0588312
+  },
+  "geometry": [
+    {
+      "lat": 47.5027273,
+      "lon": 19.0587754
+    },
+    {
+      "lat": 47.5027018,
+      "lon": 19.0588077
+    },
+    {
+      "lat": 47.5026471,
+      "lon": 19.0587132
+    },
+    {
+      "lat": 47.502554,
+      "lon": 19.0588312
+    },
+    {
+      "lat": 47.5025129,
+      "lon": 19.0587602
+    },
+    {
+      "lat": 47.5024665,
+      "lon": 19.0586799
+    },
+    {
+      "lat": 47.5024215,
+      "lon": 19.0586022
+    },
+    {
+      "lat": 47.5023739,
+      "lon": 19.05852
+    },
+    {
+      "lat": 47.5024669,
+      "lon": 19.058402
+    },
+    {
+      "lat": 47.5024132,
+      "lon": 19.0583092
+    },
+    {
+      "lat": 47.5024332,
+      "lon": 19.0582837
+    },
+    {
+      "lat": 47.5024253,
+      "lon": 19.05827
+    },
+    {
+      "lat": 47.5024898,
+      "lon": 19.0581882
+    },
+    {
+      "lat": 47.5024955,
+      "lon": 19.058198
+    },
+    {
+      "lat": 47.5026807,
+      "lon": 19.0579632
+    },
+    {
+      "lat": 47.5027749,
+      "lon": 19.0578436
+    },
+    {
+      "lat": 47.5029536,
+      "lon": 19.0576171
+    },
+    {
+      "lat": 47.5029456,
+      "lon": 19.0576033
+    },
+    {
+      "lat": 47.5030133,
+      "lon": 19.0575174
+    },
+    {
+      "lat": 47.5030244,
+      "lon": 19.0575364
+    },
+    {
+      "lat": 47.5030481,
+      "lon": 19.0575063
+    },
+    {
+      "lat": 47.5031008,
+      "lon": 19.0575974
+    },
+    {
+      "lat": 47.5031123,
+      "lon": 19.0575828
+    },
+    {
+      "lat": 47.5032049,
+      "lon": 19.0577428
+    },
+    {
+      "lat": 47.5032975,
+      "lon": 19.0579028
+    },
+    {
+      "lat": 47.5032861,
+      "lon": 19.0579172
+    },
+    {
+      "lat": 47.5033347,
+      "lon": 19.0580013
+    },
+    {
+      "lat": 47.5033097,
+      "lon": 19.058033
+    },
+    {
+      "lat": 47.5033231,
+      "lon": 19.0580561
+    },
+    {
+      "lat": 47.5032648,
+      "lon": 19.05813
+    },
+    {
+      "lat": 47.5032521,
+      "lon": 19.058108
+    },
+    {
+      "lat": 47.5030655,
+      "lon": 19.0583446
+    },
+    {
+      "lat": 47.5030248,
+      "lon": 19.0583963
+    },
+    {
+      "lat": 47.5029713,
+      "lon": 19.0584641
+    },
+    {
+      "lat": 47.5027821,
+      "lon": 19.058704
+    },
+    {
+      "lat": 47.5027946,
+      "lon": 19.0587257
+    },
+    {
+      "lat": 47.5027392,
+      "lon": 19.058796
+    },
+    {
+      "lat": 47.5027273,
+      "lon": 19.0587754
+    }
+  ],
+  "tags": {
+    "addr:city": "Budapest",
+    "addr:housenumber": "22",
+    "addr:postcode": "1061",
+    "addr:street": "Andrássy út",
+    "amenity": "theatre",
+    "architect": "Ybl Miklós",
+    "architect:wikidata": "Q1072997",
+    "architect:wikipedia": "hu:Ybl Miklós",
+    "building": "theatre",
+    "building:architecture": "neo-renaissance",
+    "building:part": "yes",
+    "capacity": "1300",
+    "construction_date": "1875-1884",
+    "contact:email": "info@opera.hu",
+    "contact:facebook": "Operahaz",
+    "contact:instagram": "operabudapest",
+    "contact:phone": "+36 1 814 7100",
+    "contact:tripadvisor": "276812",
+    "contact:website": "https://www.opera.hu/",
+    "height": "50.7",
+    "loc_name": "Operaház",
+    "name": "Magyar Állami Operaház",
+    "name:cs": "Maďarská státní opera",
+    "name:de": "Ungarische Staatsoper",
+    "name:en": "Hungarian State Opera House",
+    "name:es": "Ópera Nacional de Hungría",
+    "name:fr": "Opéra d'État hongrois",
+    "name:it": "Teatro dell’Opera",
+    "name:ko": "국립 오페라 하우스",
+    "name:pt": "Ópera Estatal Húngara",
+    "name:ru": "Венгерский государственный оперный театр",
+    "name:zh": "匈牙利國家歌劇院",
+    "source:height": "wikipedia",
+    "start_date": "1884-03-09",
+    "theatre:genre": "opera",
+    "theatre:type": "opera_house",
+    "toilets:wheelchair": "yes",
+    "tourism": "attraction",
+    "wheelchair": "yes",
+    "wikidata": "Q36833",
+    "wikimedia_commons": "Category:Hungarian State Opera House",
+    "wikipedia": "en:Hungarian State Opera House"
+  }
+}

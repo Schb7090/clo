@@ -114,32 +114,45 @@ def scale_bar(sh, origin, k):
     sh.text((x + 5 * k * step, y + 4.5), f"{5 * step} m", 2.2)
 
 
-def north_arrow(sh):
-    nx0, ny0 = DRAW[0] + 8, DRAW[1] + 10
-    sh.poly([(nx0, ny0 - 6), (nx0 + 2.5, ny0 + 2), (nx0, ny0), (nx0 - 2.5, ny0 + 2)], fill="#000")
+def north_arrow(sh, deg=0.0):
+    """North arrow; deg = plan rotation (counter-clockwise) applied to the drawing."""
+    nx0, ny0 = DRAW[0] + 10, DRAW[1] + 12
+    sh.add(f'<g transform="rotate({-deg:.2f} {nx0} {ny0})">')
+    sh.poly([(nx0, ny0 - 7), (nx0 + 2.5, ny0 + 1), (nx0, ny0 - 1), (nx0 - 2.5, ny0 + 1)], fill="#000")
     sh.text((nx0, ny0 + 6), "N", 3, weight="bold")
+    sh.add("</g>")
+
+
+def plan_rotation(model):
+    """meta.plan_rotation_deg (counter-clockwise) turns plans to the building axis; north arrow follows."""
+    deg = float(model["meta"].get("plan_rotation_deg") or 0.0)
+    c, s_ = math.cos(math.radians(deg)), math.sin(math.radians(deg))
+    return deg, (lambda x, y: (x * c - y * s_, x * s_ + y * c))
 
 
 def plan_frame(model):
-    pts = [p for w in model["walls"] for p in (w["from"], w["to"])]
+    deg, rot = plan_rotation(model)
+    pts = [rot(*p) for w in model["walls"] for p in (w["from"], w["to"])]
     for r in model["roofs"]:
-        pts += [f[:2] for face in roof_faces(r) for f in face]
+        pts += [rot(*f[:2]) for face in roof_faces(r) for f in face]
     minx, maxx = min(p[0] for p in pts) - 1, max(p[0] for p in pts) + 1
     miny, maxy = min(p[1] for p in pts) - 1, max(p[1] for p in pts) + 1
     scale = pick_scale(maxx - minx, maxy - miny, DRAW[2] - 30, DRAW[3] - 40)
     k = 1000 / scale
     ox = DRAW[0] + 20 + (DRAW[2] - 30 - (maxx - minx) * k) / 2
     oy = DRAW[1] + 15 + (DRAW[3] - 40 - (maxy - miny) * k) / 2
-    P = lambda x, y: (ox + (x - minx) * k, oy + (maxy - y) * k)
-    return P, k, scale, (minx, maxx, miny, maxy)
+    Pr = lambda x, y: (ox + (x - minx) * k, oy + (maxy - y) * k)       # rotated frame
+    P = lambda x, y: Pr(*rot(x, y))                                      # world plan coordinates
+    return P, k, scale, (minx, maxx, miny, maxy), Pr, rot, deg
 
 
 # ---------- plans ----------
 
 def plan_sheet(model, floor, year):
     walls = [w for w in model["walls"] if w.get("floor") == floor["id"]]
-    P, k, scale, (minx, maxx, miny, maxy) = plan_frame(model)
+    P, k, scale, (minx, maxx, miny, maxy), Pr, rot, deg = plan_frame(model)
     cx, cy = building_centroid(model)
+    busy = sum(1 for o in model["openings"] if o["wall"] in {w["id"] for w in walls}) > 60
 
     sh = Sheet()
     frame_and_title(sh, model, f"Plan — {floor['name']} (+{floor['z']:.2f})", scale, year)
@@ -196,12 +209,14 @@ def plan_sheet(model, floor, year):
                 sh.add(f'<path d="M {s0[0]:.2f} {s0[1]:.2f} A {r:.2f} {r:.2f} 0 0 {sweep} {end[0]:.2f} {end[1]:.2f}" '
                        f'fill="none" stroke="{ocol}" stroke-width="0.2" stroke-dasharray="1,0.6"/>')
             mid = P(ax + dx * (u0 + u1) / 2 - nx * (t + 0.6), ay + dy * (u0 + u1) / 2 - ny * (t + 0.6))
-            sh.text(mid, o["id"], 1.6, fill=ocol)
-        if not w.get("interior"):
+            if not busy:
+                sh.text(mid, o["id"], 1.6, fill=ocol)
+        if not w.get("interior") and (not busy or L >= 6):
             mx, my = (ax + bx) / 2, (ay + by) / 2
             out = -1 if (cx - mx) * nx + (cy - my) * ny > 0 else 1
             lp = P(mx + nx * out * (t + 1.2), my + ny * out * (t + 1.2))
-            ang = -math.degrees(math.atan2(dy, dx))
+            ang = -math.degrees(math.atan2(dy, dx)) - deg
+            ang = (ang + 180) % 360 - 180
             if ang > 90 or ang < -90:
                 ang += 180
             sh.text(lp, f"{w['id']}  {L:.2f}", 2.2, rot=ang, fill=col)
@@ -231,29 +246,29 @@ def plan_sheet(model, floor, year):
         sh.poly([P(x - hw, y - hd), P(x + hw, y - hd), P(x + hw, y + hd), P(x - hw, y + hd)], stroke=col, w=0.3, dash="0.8,0.5")
         sh.text(P(x, y - hd - 0.8), r["id"], 1.8, fill=col)
 
-    ext = [p for w in model["walls"] if not w.get("interior") for p in (w["from"], w["to"])]
+    ext = [rot(*p) for w in model["walls"] if not w.get("interior") for p in (w["from"], w["to"])]
     ex0, ex1 = min(p[0] for p in ext), max(p[0] for p in ext)
     ey0, ey1 = min(p[1] for p in ext), max(p[1] for p in ext)
-    a, b = P(ex0, ey0), P(ex1, ey0)
-    yd = P(0, miny)[1] + 6
+    a, b = Pr(ex0, ey0), Pr(ex1, ey0)
+    yd = Pr(0, miny)[1] + 6
     sh.line((a[0], yd), (b[0], yd), w=0.25)
     for xx in (a[0], b[0]):
         sh.line((xx, yd - 1.5), (xx, yd + 1.5), w=0.25)
     sh.text(((a[0] + b[0]) / 2, yd - 1.2), f"{ex1 - ex0:.2f}", 2.6)
-    c, d = P(ex0, ey0), P(ex0, ey1)
-    xd = P(minx, 0)[0] - 6
+    c, d = Pr(ex0, ey0), Pr(ex0, ey1)
+    xd = Pr(minx, 0)[0] - 6
     sh.line((xd, c[1]), (xd, d[1]), w=0.25)
     for yy in (c[1], d[1]):
         sh.line((xd - 1.5, yy), (xd + 1.5, yy), w=0.25)
     sh.text((xd - 1.2, (c[1] + d[1]) / 2), f"{ey1 - ey0:.2f}", 2.6, rot=-90)
 
-    north_arrow(sh)
+    north_arrow(sh, deg)
     scale_bar(sh, (DRAW[0] + 5, PAGE_H - 20), k)
     return sh.svg()
 
 
 def roof_plan_sheet(model, year):
-    P, k, scale, _ = plan_frame(model)
+    P, k, scale, _, _, _, deg = plan_frame(model)
     sh = Sheet()
     frame_and_title(sh, model, "Roof plan", scale, year)
     for w in model["walls"]:
@@ -274,7 +289,7 @@ def roof_plan_sheet(model, year):
             c = P(*[sum(p[i] for f in faces for p in f) / sum(len(f) for f in faces) for i in (0, 1)])
         sh.text(c, f"{r['id']} {r['type']}", 2.4, weight="bold", fill=col)
         sh.text((c[0], c[1] + 3.2), f"eaves +{r.get('eaves', 0):.2f} / top +{top:.2f}", 2.0, fill=col)
-    north_arrow(sh)
+    north_arrow(sh, deg)
     scale_bar(sh, (DRAW[0] + 5, PAGE_H - 20), k)
     return sh.svg()
 
@@ -323,16 +338,27 @@ def elevation_sheet(model, name, walls, year):
     frame_and_title(sh, model, f"Elevation — {name}", scale, year)
     sh.line((DRAW[0] + 5, gy), (DRAW[0] + DRAW[2] - 5, gy), w=0.6)
     sh.text((DRAW[0] + 6, gy + 4), "±0.00", 2.2, "start")
-    for _, r, f in sorted(roof_polys, key=lambda t: -t[0]):  # far faces first
-        col, fill = gcol(r)
-        sh.poly([P(u, z) for u, z in f], fill=fill, stroke=col, w=0.08 if r["type"] == "dome" else 0.25)
     opens = {}
     for o in model["openings"]:
         opens.setdefault(o["wall"], []).append(o)
-    for w, u0, u1, z0, z1 in sorted(spans, key=lambda s: -depth(*s[0]["from"])):
+    n_open = sum(len(opens.get(s[0]["id"], [])) for s in spans)
+    label_openings = n_open <= 40            # big façades: ids would only clutter the sheet
+    # one painter's list for roof faces and walls, so nearer elements cover farther ones
+    items = [(d, 0, ("roof", r, f)) for d, r, f in roof_polys]
+    items += [((depth(*s[0]["from"]) + depth(*s[0]["to"])) / 2, 1, ("wall",) + s) for s in spans]
+    levels = set()
+    for _, _, it in sorted(items, key=lambda t: (-t[0], t[1])):
+        if it[0] == "roof":
+            _, r, f = it
+            col, fill = gcol(r)
+            sh.poly([P(u, z) for u, z in f], fill=fill, stroke=col, w=0.08 if r["type"] == "dome" else 0.25)
+            continue
+        _, w, u0, u1, z0, z1 = it
         col, fill = gcol(w)
         sh.poly([P(u0, z0), P(u1, z0), P(u1, z1), P(u0, z1)], fill=fill, stroke=col, w=0.5)
-        sh.text((left - 3, P(0, z1)[1] + 1), f"+{z1:.2f}", 2.2, "end")
+        if round(z1, 2) not in levels:
+            levels.add(round(z1, 2))
+            sh.text((left - 3, P(0, z1)[1] + 1), f"+{z1:.2f}", 2.2, "end")
         flip = proj(*w["from"]) > proj(*w["to"])
         for o in opens.get(w["id"], []):
             a = proj(*w["from"]) + (-1 if flip else 1) * o["offset"]
@@ -359,11 +385,11 @@ def elevation_sheet(model, name, walls, year):
                     for i in range(1, 4):
                         uu = oa + (ob - oa) * i / 4
                         sh.line(P(uu, zs), P(uu, ze), ocol, 0.2)
-            sh.text(P((oa + ob) / 2, zs - 0.35), o["id"], 1.5, fill=ocol)
+            if label_openings:
+                sh.text(P((oa + ob) / 2, zs - 0.35), o["id"], 1.5, fill=ocol)
     ids = {w["id"] for w in walls}
-    for r in model["ornaments"]:
-        if r.get("wall") not in ids:
-            continue
+    orns = [r for r in model["ornaments"] if r.get("wall") in ids]
+    for r in orns:
         u = proj(*r["position"][:2])
         hw, z, h = r["size"][0] / 2, r["position"][2], r["size"][2]
         col = gcol(r)[0]
@@ -371,7 +397,8 @@ def elevation_sheet(model, name, walls, year):
         if r["type"] == "statue":
             c = P(u, z + h * 0.88)
             sh.add(f'<circle cx="{c[0]:.2f}" cy="{c[1]:.2f}" r="{h * 0.08 * k:.2f}" fill="none" stroke="{col}" stroke-width="0.3"/>')
-        sh.text(P(u, z + h + 0.3), f"{r['id']} {r.get('name', '')}"[:40], 1.8, fill=col)
+        label = f"{r['id']} {r.get('name', '')}"[:40] if len(orns) <= 10 else r["id"]
+        sh.text(P(u, z + h + 0.3), label, 1.8 if len(orns) <= 10 else 1.1, fill=col)
     if model["roofs"]:
         sh.text((right + 2, P(0, zmax)[1] + 1), f"top +{zmax:.2f}", 2.0, "start")
     a, b = P(min(s[1] for s in spans), 0), P(max(s[2] for s in spans), 0)
