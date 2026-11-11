@@ -36,3 +36,6 @@ load only over http: `cd "$P" && python3 -m http.server`, then open
 Try the fictional example: copy
 `.claude/skills/building-reconstruction/assets/example_building.json` to
 `<project>/04_model/building.json` and run the generators.
+
+## Android: Postpone Guard
+A separate small Android app lives in [android/postpone-guard](android/postpone-guard/README.md).
